@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Mail, Github, ExternalLink } from "lucide-react"
 
 export function Footer() {
@@ -14,12 +15,18 @@ export function Footer() {
         </div>
 
         <div className="flex items-center gap-6">
-          <a
-            href="#"
+          <Link
+            href="/pravila"
             className="text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             Pravila
-          </a>
+          </Link>
+          <Link
+            href="/za-studente"
+            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Za Studente
+          </Link>
           <a
             href="mailto:info@micromouse.hr"
             className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
