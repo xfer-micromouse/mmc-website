@@ -1,14 +1,17 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { label: "O Natjecanju", href: "#about" },
-  { label: "Raspored", href: "#timeline" },
-  { label: "Što je Micromouse?", href: "#what-is" },
-  { label: "Sponzori", href: "#sponsors" },
+  { label: "O Natjecanju", href: "/#about" },
+  { label: "Raspored", href: "/#timeline" },
+  { label: "Za Studente", href: "/za-studente" },
+  { label: "Pravila", href: "/pravila" },
 ]
 
 interface NavbarProps {
@@ -17,30 +20,49 @@ interface NavbarProps {
 
 export function Navbar({ onRegisterClick }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const pathname = usePathname()
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-dark-bg/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2">
-          <MazeIcon />
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/logo.svg"
+            alt="Micromouse Croatia logo"
+            width={32}
+            height={32}
+            className="h-8 w-auto"
+          />
           <span className="font-display text-lg font-bold tracking-wider text-foreground">
             MICROMOUSE
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Links */}
         <ul className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            const isActive =
+              link.href.startsWith("/#")
+                ? pathname === "/"
+                : pathname === link.href
+
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={cn(
+                    "text-sm transition-colors hover:text-foreground",
+                    isActive
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            )
+          })}
         </ul>
 
         {/* CTA */}
@@ -71,13 +93,13 @@ export function Navbar({ onRegisterClick }: NavbarProps) {
         <ul className="flex flex-col gap-1 px-4 py-4">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
                 className="block rounded-md px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
           <li className="mt-2">
@@ -94,44 +116,5 @@ export function Navbar({ onRegisterClick }: NavbarProps) {
         </ul>
       </div>
     </nav>
-  )
-}
-
-function MazeIcon() {
-  return (
-    <svg
-      width="28"
-      height="28"
-      viewBox="0 0 28 28"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <rect
-        x="1"
-        y="1"
-        width="26"
-        height="26"
-        rx="4"
-        stroke="url(#maze-grad)"
-        strokeWidth="2"
-        fill="none"
-      />
-      <path
-        d="M7 1v10h6V7h8v6h-4v8H7v-4h4v-4H1"
-        stroke="url(#maze-grad)"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <circle cx="21" cy="21" r="2.5" fill="#FF5E78" />
-      <defs>
-        <linearGradient id="maze-grad" x1="0" y1="0" x2="28" y2="28">
-          <stop stopColor="#FF9F76" />
-          <stop offset="0.5" stopColor="#FF5E78" />
-          <stop offset="1" stopColor="#A64AF5" />
-        </linearGradient>
-      </defs>
-    </svg>
   )
 }
