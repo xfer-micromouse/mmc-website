@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 md:flex-row md:justify-between">
         <div className="flex flex-col items-center gap-2 md:items-start">
           <span className="font-display text-sm font-bold tracking-widest text-foreground">
-            MICROMOUSE CROATIA
+            MICROMOUSE Hrvatska
           </span>
           <span className="text-xs text-muted-foreground">
             {"© 2026 Sva prava pridržana."}
@@ -28,25 +28,11 @@ export function Footer() {
             Za Studente
           </Link>
           <a
-            href="mailto:info@micromouse.hr"
+            href="mailto:micromouse@xfer.hr"
             className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             <Mail size={14} />
             Kontakt
-          </a>
-          <a
-            href="#"
-            className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <Github size={14} />
-            GitHub
-          </a>
-          <a
-            href="#"
-            className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <ExternalLink size={14} />
-            IEEE
           </a>
         </div>
       </div>
