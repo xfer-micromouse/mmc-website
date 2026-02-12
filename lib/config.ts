@@ -3,70 +3,55 @@ export const timelineData = [
     title: "Otvaranje prijava",
     description:
       "Prijavite svoj tim i robota za natjecanje. Maksimalno 3 člana po timu.",
-    date: "1. ožujka 2026.",
+    date: "20. veljače 2026.",
     iconType: "rocket" as const,
   },
   {
-    title: "Tehnička verifikacija",
+    title: "Početak radionica i predavanja",
     description:
-      "Online provjera tehničke specifikacije robota i potvrda sudjelovanja.",
-    date: "15. travnja 2026.",
+      "Pet predavanja o različitim djelovima dizajna i programiranja Micromousa kako bi olakšali proces i motivirali studente i sve prijavljene",
+    date: "15. ožujka 2026.",
     iconType: "check" as const,
   },
   {
-    title: "Zatvaranje prijava",
+    title: "Rok za predaju tehničke dokumentacije za natjecatelje financirane od strane nas",
     description:
-      "Zadnji dan za prijavu timova. Nakon ovog datuma prijave se neće primati.",
-    date: "1. svibnja 2026.",
+      "Za odabrane timove financiramo izradu tiskanih pločica i naručivanje komponenti do dogovorenog iznosa",
+    date: "10. travnja 2026.",
+    iconType: "clock" as const,
+  },
+  {
+    title: "Zatvaranje prijava i mock natjecanje",
+    description:
+      "Zatvaranje prijava za natjecatelje koji se sami financiraju i održavanje testnog natjecanja na pravom labirintu",
+    date: "1. srpnja 2026.",
     iconType: "clock" as const,
   },
   {
     title: "Dan natjecanja",
     description:
-      "Okupljanje svih timova, kvalifikacijske vožnje i finalne utrke u labirintu.",
-    date: "14. lipnja 2026.",
-    iconType: "trophy" as const,
-  },
-  {
-    title: "Proglašenje pobjednika",
-    description:
-      "Svečana dodjela nagrada najbržim robotima i najboljim timovima.",
-    date: "14. lipnja 2026.",
+      "Dan-D... Na prostorima Sveučilišta Algebra održati će se natjecanje za sve prijavljene timove i kategorije",
+    date: "31. svibnja 2026.",
     iconType: "award" as const,
   },
 ]
 
 export const sponsorsData = [
   {
-    name: "FER Zagreb",
+    name: "TBA1",
     tier: "gold" as const,
-    placeholderText: "Fakultet elektrotehnike i računarstva",
+    placeholderText: "TBA",
   },
   {
-    name: "IEEE Croatia",
+    name: "TBA2",
     tier: "gold" as const,
-    placeholderText: "Institute of Electrical and Electronics Engineers",
+    placeholderText: "TBA",
   },
   {
-    name: "Sveučilište u Zagrebu",
-    tier: "silver" as const,
-    placeholderText: "University of Zagreb",
-  },
-  {
-    name: "Partner 4",
+    name: "TBA3",
     tier: "silver" as const,
     placeholderText: "TBA",
-  },
-  {
-    name: "Partner 5",
-    tier: "bronze" as const,
-    placeholderText: "TBA",
-  },
-  {
-    name: "Partner 6",
-    tier: "bronze" as const,
-    placeholderText: "TBA",
-  },
+  }
 ]
 
 export const competitionStats = [

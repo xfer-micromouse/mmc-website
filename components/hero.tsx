@@ -25,7 +25,7 @@ export function Hero({ onRegisterClick }: HeroProps) {
           <span className="gradient-text">MicroMouse</span>
         </h1>
         <h2 className="mt-3 font-display text-2xl font-bold tracking-widest text-foreground sm:text-3xl md:text-4xl">
-          CROATIA{" "}
+          HRVATSKA {" "}
           <span className="text-neon-purple">2026</span>
         </h2>
         <p className="mx-auto mt-6 max-w-md text-lg text-muted-foreground leading-relaxed">

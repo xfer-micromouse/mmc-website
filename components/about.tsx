@@ -20,8 +20,11 @@ export function About() {
           </p>
           <p className="mt-4 text-muted-foreground leading-relaxed">
             Natjecanje spaja znanja iz elektrotehnike, mehatronike, programiranja
-            i umjetne inteligencije. Micromouse Croatia 2026 okuplja timove iz
+            i umjetne inteligencije. Micromouse Hrvatska 2026 okuplja timove iz
             cijele regije u uzbudljivom danu brzine i preciznosti.
+          </p>
+          <p className="mt-4 text-muted-foreground leading-relaxed">
+            Svi su slobodni prijaviti se, a mi financiramo 10 najboljih STUDENTSKIH miševa.
           </p>
 
           {/* Stats */}
@@ -55,6 +58,7 @@ export function About() {
 }
 
 function MazeVisual() {
+  // grid math: offset=8, cell=36, centers = 26,62,98,134
   return (
     <div className="relative h-72 w-72 sm:h-80 sm:w-80">
       {/* Outer glow */}
@@ -65,70 +69,68 @@ function MazeVisual() {
 
       {/* Maze grid */}
       <div className="relative h-full w-full overflow-hidden rounded-2xl border border-border bg-card/50 p-4">
-        <svg
-          viewBox="0 0 160 160"
-          className="h-full w-full"
-          aria-label="Maze pattern"
-        >
-          {/* Maze walls */}
-          <g stroke="hsl(260, 12%, 22%)" strokeWidth="2" fill="none">
-            {/* Outer walls */}
+        <svg viewBox="0 0 160 160" className="h-full w-full" aria-label="Maze pattern">
+          {/* Outer wall */}
+          <g stroke="hsl(260, 12%, 22%)" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <rect x="4" y="4" width="152" height="152" rx="4" />
-            {/* Inner maze */}
-            <path d="M4 40h40v-36" />
-            <path d="M40 40v40h40" />
-            <path d="M80 40V4" />
-            <path d="M80 80h40V40h36" />
-            <path d="M120 80v40" />
-            <path d="M80 80v36h-40" />
-            <path d="M40 120v36" />
-            <path d="M80 120h-4v36" />
-            <path d="M120 120h36" />
-            <path d="M4 80h36" />
-            <path d="M120 120v36" />
           </g>
 
-          {/* Solution path */}
+          {/* Internal walls built as segments with gaps (so path can pass) */}
+          <g stroke="hsl(260, 12%, 22%)" strokeWidth="3" fill="none" strokeLinecap="butt">
+            {/* Vertical boundaries (x = 44, 80, 116) with gaps */}
+            {/* x = 44 -> gap around center y = 62 (54 -> 70) */}
+            <line x1="44" y1="8" x2="44" y2="54" />
+            <line x1="44" y1="70" x2="44" y2="152" />
+
+            {/* x = 80 -> gap around center y = 62 (54 -> 70) */}
+            <line x1="80" y1="8" x2="80" y2="54" />
+            <line x1="80" y1="70" x2="80" y2="152" />
+
+            {/* x = 116 -> gap around center y = 98 (90 -> 106) */}
+            <line x1="116" y1="8" x2="116" y2="90" />
+            <line x1="116" y1="106" x2="116" y2="152" />
+
+            {/* Horizontal boundaries (y = 44, 80, 116) with gaps */}
+            {/* y = 44 -> gap around x = 26 (18 -> 34) */}
+            <line x1="8" y1="44" x2="18" y2="44" />
+            <line x1="34" y1="44" x2="152" y2="44" />
+
+            {/* y = 80 -> gap around x = 98 (90 -> 106) */}
+            <line x1="8" y1="80" x2="90" y2="80" />
+            <line x1="106" y1="80" x2="152" y2="80" />
+
+            {/* y = 116 -> gap around x = 134 (126 -> 142) */}
+            <line x1="8" y1="116" x2="126" y2="116" />
+            <line x1="142" y1="116" x2="152" y2="116" />
+          </g>
+
+          {/* Solution path (aligned to corridor centers: 26,62,98,134) */}
           <path
-            d="M20 20 L20 50 L60 50 L60 90 L100 90 L100 50 L140 50 L140 90 L140 130"
+            d="M26 26 L26 62 L62 62 L98 62 L98 98 L134 98 L134 134"
             stroke="url(#path-grad)"
-            strokeWidth="2"
+            strokeWidth="3"
             fill="none"
             strokeLinecap="round"
+            strokeLinejoin="round"
             strokeDasharray="6 4"
-            opacity="0.5"
+            opacity="0.95"
           />
 
-          {/* Mouse dot */}
-          <circle cx="140" cy="140" r="6" fill="#FF5E78">
-            <animate
-              attributeName="opacity"
-              values="0.5;1;0.5"
-              dur="2s"
-              repeatCount="indefinite"
-            />
-          </circle>
-          <circle cx="140" cy="140" r="10" fill="none" stroke="#FF5E78" strokeWidth="1" opacity="0.3">
-            <animate
-              attributeName="r"
-              values="8;14;8"
-              dur="2s"
-              repeatCount="indefinite"
-            />
-            <animate
-              attributeName="opacity"
-              values="0.4;0;0.4"
-              dur="2s"
-              repeatCount="indefinite"
-            />
-          </circle>
-
           {/* Start marker */}
-          <circle cx="20" cy="20" r="4" fill="#A64AF5" opacity="0.8" />
+          <circle cx="26" cy="26" r="4" fill="#A64AF5" opacity="0.95" />
+
+          {/* Mouse dot (end) */}
+          <circle cx="134" cy="134" r="6" fill="#FF5E78">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="134" cy="134" r="10" fill="none" stroke="#FF5E78" strokeWidth="1" opacity="0.3">
+            <animate attributeName="r" values="8;14;8" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite" />
+          </circle>
 
           <defs>
-            <linearGradient id="path-grad" x1="20" y1="20" x2="140" y2="130">
-              <stop stopColor="#A64AF5" />
+            <linearGradient id="path-grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#A64AF5" />
               <stop offset="0.5" stopColor="#FF5E78" />
               <stop offset="1" stopColor="#FF9F76" />
             </linearGradient>
@@ -136,5 +138,6 @@ function MazeVisual() {
         </svg>
       </div>
     </div>
-  )
+  );
 }
+
