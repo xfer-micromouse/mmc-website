@@ -13,18 +13,17 @@ export function About() {
             O Natjecanju
           </h2>
           <p className="mt-6 text-muted-foreground leading-relaxed">
-            Micromouse je natjecanje u kojem autonomni roboti samostalno
-            rješavaju labirint. Robot mora pronaći najbrži put od starta do
+            Micromouse Zagreb je studentsko robotičarsko natjecanje u kojem mali autonomni robot samostalno
+            istražuje i rješava labirint. Natjecatelji grade i programiraju robota iz nule.
+          </p>
+          <p className="mt-4 text-muted-foreground leading-relaxed">
+            Robot mora pronaći najbrži put od starta do
             cilja koristeći vlastite senzore i algoritme - bez ikakve vanjske
             pomoći.
           </p>
           <p className="mt-4 text-muted-foreground leading-relaxed">
-            Natjecanje spaja znanja iz elektrotehnike, mehatronike, programiranja
-            i umjetne inteligencije. Micromouse Hrvatska 2026 okuplja timove iz
-            cijele regije u uzbudljivom danu brzine i preciznosti.
-          </p>
-          <p className="mt-4 text-muted-foreground leading-relaxed">
-            Svi su slobodni prijaviti se, a mi financiramo 10 najboljih STUDENTSKIH miševa.
+            Micromouse Zagreb okuplja timove iz
+            cijele Hvatske koji spajaju znanja iz elektronike, embeded sustava i algoritama navigacije. 
           </p>
 
           {/* Stats */}

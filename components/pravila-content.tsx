@@ -48,11 +48,11 @@ export function PravilaContent() {
               </li>
               <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-peach/60">
                 <span className="font-semibold text-foreground">Startno polje:</span>{" "}
-                {"Nalazi se u jednom od kutova labirinta (uobičajeno dolje-lijevo, koordinate 0,0). Tri zida okružuju startno polje, a jedini izlaz vodi u labirint."}
+                {"Nalazi se u jednom od kutova labirinta. Tri zida okružuju startno polje (lijeva i stražnja strana su rubovi labirinta), a jedini izlaz vodi u labirint."}
               </li>
               <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-peach/60">
                 <span className="font-semibold text-foreground">Cilj:</span>{" "}
-                {"Cilj je kvadratna površina od 2 x 2 polja koja se nalazi u središtu labirinta. Ulazak u bilo koje od ta 4 polja smatra se završetkom vožnje."}
+                {"Cilj je kvadratna površina od 2 x 2 polja koja se nalazi u središtu labirinta."}
               </li>
             </ul>
           </div>
@@ -77,15 +77,15 @@ export function PravilaContent() {
               </li>
               <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-pink/60">
                 <span className="font-semibold text-foreground">{"Veličina:"}</span>{" "}
-                {"Robot mora u potpunosti stati unutar startnog polja (180x180 mm)."}
+                {"Robot mora maksimalno biti dimenzija 25 x 25 cm."}
               </li>
               <li className="ml-4 rounded-lg border border-border bg-card/50 p-3 text-sm">
                 <span className="font-semibold text-foreground">Napomena:</span>{" "}
-                {"Nakon izlaska iz starta, robot se smije geometrijski proširiti (npr. mehanizmi za stabilizaciju), ali ne smije preskakati zidove."}
+                {"Robot se ne smije odvajati ni od jednog dijela sebe tijekom kretanja kroz labirint."}
               </li>
               <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-pink/60">
                 <span className="font-semibold text-foreground">Kretanje:</span>{" "}
-                {"Robot se mora kretati isključivo po podu labirinta koristeći kotače ili sličan pogon."}
+                {"Robot se mora kretati isključivo po podu labirinta."}
               </li>
               <li className="ml-4 rounded-lg border border-border bg-card/50 p-3 text-sm">
                 <span className="font-semibold text-foreground">Zabranjeno je:</span>{" "}
@@ -118,11 +118,11 @@ export function PravilaContent() {
             <ul className="space-y-3 pl-5">
               <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-purple/60">
                 <span className="font-semibold text-foreground">{"Vremensko ograničenje:"}</span>{" "}
-                {"Svaki tim ima na raspolaganju ukupno 7 do 10 minuta (ovisno o broju prijavljenih timova) za boravak u labirintu. Ovo se naziva \"vrijeme u areni\"."}
+                {"Svaki tim ima na raspolaganju ukupno 13 minuta za boravak u labirintu. Ovo se naziva \"vrijeme u areni\"."}
               </li>
               <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-purple/60">
                 <span className="font-semibold text-foreground">{"Broj vožnji:"}</span>{" "}
-                {"Unutar tog vremena, robot može odraditi neograničen broj vožnji (Run)."}
+                {"Unutar tog vremena, robot može odraditi neograničen broj vožnji (Runs)."}
               </li>
               <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-purple/60">
                 <span className="font-semibold text-foreground">{"Vrste vožnji:"}</span>
@@ -144,16 +144,16 @@ export function PravilaContent() {
                     {"Jednom kada labirint bude otkriven (neposredno prije starta), zabranjeno je spajanje robota na računalo radi izmjene koda."}
                   </li>
                   <li>
-                    {"Dozvoljeno je mijenjanje parametara (npr. odabir algoritma, kalibracija senzora) isključivo putem fizičkih sučelja na samom robotu (tipke, prekidači, potenciometri, display)."}
+                    {"Dozvoljeno je mijenjanje parametara (npr. odabir algoritma, kalibracija senzora) isključivo putem fizičkih sučelja na samom robotu (npr. tipke, prekidači)."}
                   </li>
                   <li>
-                    {"Natjecatelj smije dodirnuti robota samo kako bi ga stavio na start ili ga uklonio iz labirinta ako zapne."}
+                    {"Svako diranje robota izvan startnog polja je zabranjeno. U slučaju da robot zapne, natjecatelj ga smije ukloniti iz labirinta uz penaliziranje iduće vožnje."}
                   </li>
                 </ul>
               </li>
               <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-purple/60">
                 <span className="font-semibold text-foreground">Startna procedura:</span>{" "}
-                {"Prije svake vožnje, robot mora mirovati na startnom polju. Vožnja počinje aktivacijom tipke/senzora na robotu."}
+                {"Prije svake vožnje, robot mora mirovati na startnom polju, a vožnja počinje izlaskom iz njega."}
               </li>
             </ul>
           </div>
@@ -172,9 +172,26 @@ export function PravilaContent() {
 
           <div className="mt-6 space-y-4 text-muted-foreground leading-relaxed">
             <ul className="space-y-3 pl-5">
-              <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-peach/60">
-                <span className="font-semibold text-foreground">Cilj natjecanja:</span>{" "}
-                {"Pobjednik je robot koji ostvari najbrže vrijeme vožnje od starta do cilja."}
+               <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-purple/60">
+                <span className="font-semibold text-foreground">Komponente ocjenjivanja:</span>
+                <ul className="mt-2 space-y-2 pl-4">
+                  <li>
+                    <span className="font-semibold text-foreground">Vrijeme prolaska - 65%</span>
+                    <li>{" Najbrže zabilježeno vrijeme. Bodovi se dodjeljuju proporcionalno na temelju brzine (npr. najbrži = 100%, ostali = postotak najbržeg vremena)*"}</li>
+                  </li>
+                  <li>
+                    <span className="font-semibold text-foreground">Tehnički performans robota - 10%</span>
+                    <li>{" Stabilnost, mehanički dizajn, točnost senzora i pouzdanost."}</li>
+                  </li>
+                  <li>
+                    <span className="font-semibold text-foreground">Algoritmi i strategija - 10%</span>
+                    <li>{" Učinkovitost algoritma, inteligentno istraživanje labirinta i optimizacija puta."}</li>
+                  </li>
+                  <li>
+                    <span className="font-semibold text-foreground">Prezentacija - 15%</span>
+                    <li>{" Jasnoća i organizacija prezentacije, kreativnost i inovativna rješenja. Dubina razumijevanja i kvaliteta rada demonstrirani na zadanim temama."}</li>
+                  </li>
+                </ul>
               </li>
               <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-peach/60">
                 <span className="font-semibold text-foreground">Mjerenje vremena:</span>{" "}
@@ -187,7 +204,7 @@ export function PravilaContent() {
                     {"Ako se robot zaglavi ili \"izgubi\", natjecatelj ga može podići i vratiti na start."}
                   </li>
                   <li>
-                    {"Vrijeme u areni (ukupnih 7-10 min) se ne zaustavlja dok natjecatelj resetira robota."}
+                    {"Vrijeme u areni se ne zaustavlja dok natjecatelj resetira robota."}
                   </li>
                   <li>
                     {"Prekinuta vožnja se ne boduje."}

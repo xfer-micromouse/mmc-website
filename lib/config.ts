@@ -10,21 +10,21 @@ export const timelineData = [
     title: "Početak radionica i predavanja",
     description:
       "Pet predavanja o različitim djelovima dizajna i programiranja Micromousa kako bi olakšali proces i motivirali studente i sve prijavljene",
-    date: "15. ožujka 2026.",
+    date: "9. ožujka 2026.",
     iconType: "check" as const,
   },
   {
-    title: "Rok za predaju tehničke dokumentacije za natjecatelje financirane od strane nas",
+    title: "Rok za predaju tehničke dokumentacije za financiranje komponenti",
     description:
-      "Za odabrane timove financiramo izradu tiskanih pločica i naručivanje komponenti do dogovorenog iznosa",
+      "Za timove financiramo izradu tiskanih pločica i naručivanje komponenti do dogovorenog iznosa",
     date: "10. travnja 2026.",
     iconType: "clock" as const,
   },
   {
     title: "Zatvaranje prijava i mock natjecanje",
     description:
-      "Zatvaranje prijava za natjecatelje koji se sami financiraju i održavanje testnog natjecanja na pravom labirintu",
-    date: "1. srpnja 2026.",
+      "Održavanje testnog natjecanja na pravom labirintu",
+    date: "15. svibnja 2026.",
     iconType: "clock" as const,
   },
   {
@@ -38,19 +38,19 @@ export const timelineData = [
 
 export const sponsorsData = [
   {
-    name: "TBA1",
+    name: "DOCK-ING",
     tier: "gold" as const,
-    placeholderText: "TBA",
+    placeholderText: "",
   },
   {
-    name: "TBA2",
+    name: "STYPE",
     tier: "gold" as const,
-    placeholderText: "TBA",
+    placeholderText: "",
   },
   {
     name: "TBA3",
     tier: "silver" as const,
-    placeholderText: "TBA",
+    placeholderText: "",
   }
 ]
 
@@ -66,7 +66,7 @@ export const competitionStats = [
     color: "#FF5E78",
   },
   {
-    value: "10min",
+    value: "13min",
     label: "Vremenski limit",
     color: "#A64AF5",
   },
