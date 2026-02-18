@@ -21,7 +21,7 @@ export const timelineData = [
     iconType: "clock" as const,
   },
   {
-    title: "Zatvaranje prijava i mock natjecanje",
+    title: "Mock natjecanje",
     description:
       "Održavanje testnog natjecanja na pravom labirintu",
     date: "15. svibnja 2026.",
@@ -38,19 +38,19 @@ export const timelineData = [
 
 export const sponsorsData = [
   {
-    name: "DOCK-ING",
+    name: "TBA1",
     tier: "gold" as const,
-    placeholderText: "",
+    placeholderText: "TBA1",
   },
   {
-    name: "STYPE",
+    name: "TBA2",
     tier: "gold" as const,
-    placeholderText: "",
+    placeholderText: "TBA2",
   },
   {
     name: "TBA3",
     tier: "silver" as const,
-    placeholderText: "",
+    placeholderText: "TBA3",
   }
 ]
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { Grid3X3, Bot, Timer, Trophy } from "lucide-react"
+import { Grid3X3, Bot, Timer, Trophy, FileText } from "lucide-react"
 
 export function PravilaContent() {
   return (
@@ -213,6 +213,29 @@ export function PravilaContent() {
               </li>
             </ul>
           </div>
+        </section>
+        {/* Preuzmi službena pravila */}
+        <section className="mt-12">
+         <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-neon-purple/10">
+              <FileText className="h-5 w-5 text-neon-purple" />
+            </div>
+            <h2 className="font-display text-2xl font-bold tracking-tight text-foreground">
+              Preuzmi Pravila Natjecanja
+            </h2>
+          </div>
+           <div className="mt-4 space-y-4 text-muted-foreground leading-relaxed">
+            {"Za detaljnije informacije i sve specifične uvjete natjecanja, preuzmite službeni PDF dokument s pravilima."}
+            </div>
+            <div className="mt-6 text-center">
+            <a
+              href="https://docs.google.com/document/d/1_9D4XSdUI6c_gq3w7-RXWeAWdlFrlY8CkNVzqWzwu18/export?format=pdf"
+              className="inline-flex items-center gap-2 rounded-lg bg-neon-purple/10 px-6 py-3 text-base font-medium text-neon-purple hover:bg-neon-purple/20 transition-colors"
+              download="Pravilnik_MicroMouse_Zagreb.pdf"
+            >
+              Preuzmi Službena Pravila (PDF)
+            </a>
+            </div>
         </section>
       </div>
     </div>

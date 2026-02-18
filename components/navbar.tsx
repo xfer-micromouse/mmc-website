@@ -110,7 +110,7 @@ export function Navbar({ onRegisterClick }: NavbarProps) {
                 setMobileOpen(false)
                 onRegisterClick()
               }}
-              className="w-full rounded-lg bg-gradient-to-r from-neon-peach via-neon-pink to-neon-purple px-5 py-2.5 text-sm font-semibold text-dark-bg"
+              className="w-full rounded-lg bg-gradient-to-r from-neon-peach via-neon-pink to-neon-purple px-5 py-2.5 text-sm font-semibold text-light-bg"
             >
               Prijavi se
             </button>

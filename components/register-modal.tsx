@@ -2,14 +2,13 @@
 
 import { X, GraduationCap, Users } from "lucide-react"
 
-const STUDENT_FORM_URL = "#" // TODO: Replace with actual Google Forms link
-const OSTALI_FORM_URL = "#" // TODO: Replace with actual Google Forms link
+const STUDENT_FORM_URL = "https://forms.gle/KdXHfawPbWAS6zpM7" // TODO: Replace with actual Google Forms link
 
 interface RegisterModalProps {
   isOpen: boolean
   onClose: () => void
 }
-const IS_DISABLED = true;
+const IS_DISABLED = false;
 
 export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
   if (!isOpen) return null
@@ -34,11 +33,11 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
         </button>
 
         <h3 className="font-display text-2xl font-bold text-foreground">
-          Prijave Kreću uskoro
+          Prijavi svoj tim
         </h3>
         <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-          Stay tuned...
-        </p> 
+          Još {Math.ceil((new Date('2026-03-09').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} dana do početka radionica!!
+        </p>
 
         <div className="mt-6 flex flex-col gap-4">
     {/* Student Link */}
@@ -60,40 +59,14 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
       </div>
       <div>
         <span className="font-display text-base font-semibold text-foreground">
-          {IS_DISABLED ? "Prijave nisu počele" : "Student prijave"}
+          {IS_DISABLED ? "Prijave nisu počele" : "Prijave za studente"}
         </span>
         <p className="mt-0.5 text-sm text-muted-foreground">
-          {IS_DISABLED ? "" : "Za studente"}
+          {IS_DISABLED ? "" : "Prijave završavaju 7. ožujka 2026."}
         </p>
       </div>
-    </a>
-
-    {/* Ostali Link */}
-    <a
-      href={IS_DISABLED ? undefined : OSTALI_FORM_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-disabled={IS_DISABLED}
-      className={`
-        group flex items-center gap-4 rounded-xl border border-border p-4 transition-all
-        ${IS_DISABLED 
-          ? "pointer-events-none opacity-50 grayscale cursor-not-allowed" 
-          : "hover:border-neon-purple hover:shadow-[0_0_20px_rgba(166,74,245,0.15)]"
-        }
-      `}
-    >
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-neon-purple/10">
-        <Users size={24} className="text-neon-purple" />
-      </div>
-      <div>
-        <span className="font-display text-base font-semibold text-foreground">
-          {IS_DISABLED ? "Prijave nisu počele" : "Prijave za ostale"}
-        </span>
-        <p className="mt-0.5 text-sm text-muted-foreground">
-          {IS_DISABLED ? "" : "Za sve ostale zainteresirane"}
-        </p>
-      </div>
-    </a>
+    </a> 
+    
   </div>
       </div>
     </div>
