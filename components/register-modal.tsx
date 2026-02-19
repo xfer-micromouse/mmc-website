@@ -2,13 +2,13 @@
 
 import { X, GraduationCap, Users } from "lucide-react"
 
-const STUDENT_FORM_URL = "#" // TODO: Replace with actual Google Forms link
-const OSTALI_FORM_URL = "#" // TODO: Replace with actual Google Forms link
+const STUDENT_FORM_URL = "https://forms.gle/KdXHfawPbWAS6zpM7" // TODO: Replace with actual Google Forms link
 
 interface RegisterModalProps {
   isOpen: boolean
   onClose: () => void
 }
+const IS_DISABLED = false;
 
 export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
   if (!isOpen) return null
@@ -33,51 +33,41 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
         </button>
 
         <h3 className="font-display text-2xl font-bold text-foreground">
-          Prijavi se
+          Prijavi svoj tim
         </h3>
         <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-          Odaberi kategoriju prijave koja ti odgovara.
+          Još {Math.ceil((new Date('2026-03-09').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} dana do početka radionica!!
         </p>
 
         <div className="mt-6 flex flex-col gap-4">
-          <a
-            href={STUDENT_FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-4 rounded-xl border border-border p-4 transition-all hover:border-neon-pink hover:shadow-[0_0_20px_rgba(255,94,120,0.15)]"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-neon-pink/10">
-              <GraduationCap size={24} className="text-neon-pink" />
-            </div>
-            <div>
-              <span className="font-display text-base font-semibold text-foreground">
-                Student prijave
-              </span>
-              <p className="mt-0.5 text-sm text-muted-foreground">
-                Za studente visokih učilišta
-              </p>
-            </div>
-          </a>
-
-          <a
-            href={OSTALI_FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-4 rounded-xl border border-border p-4 transition-all hover:border-neon-purple hover:shadow-[0_0_20px_rgba(166,74,245,0.15)]"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-neon-purple/10">
-              <Users size={24} className="text-neon-purple" />
-            </div>
-            <div>
-              <span className="font-display text-base font-semibold text-foreground">
-                Prijave za ostale
-              </span>
-              <p className="mt-0.5 text-sm text-muted-foreground">
-                Za sve ostale zainteresirane
-              </p>
-            </div>
-          </a>
-        </div>
+    {/* Student Link */}
+    <a 
+      href={IS_DISABLED ? undefined : STUDENT_FORM_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-disabled={IS_DISABLED}
+      className={`
+        group flex items-center gap-4 rounded-xl border border-border p-4 transition-all
+        ${IS_DISABLED 
+          ? "pointer-events-none opacity-50 grayscale cursor-not-allowed" 
+          : "hover:border-neon-pink hover:shadow-[0_0_20px_rgba(255,94,120,0.15)]"
+        }
+      `}
+    >
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-neon-pink/10">
+        <GraduationCap size={24} className="text-neon-pink" />
+      </div>
+      <div>
+        <span className="font-display text-base font-semibold text-foreground">
+          {IS_DISABLED ? "Prijave nisu počele" : "Prijave za studente"}
+        </span>
+        <p className="mt-0.5 text-sm text-muted-foreground">
+          {IS_DISABLED ? "" : "Prijave završavaju 7. ožujka 2026."}
+        </p>
+      </div>
+    </a> 
+    
+  </div>
       </div>
     </div>
   )
