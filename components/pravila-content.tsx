@@ -216,7 +216,7 @@ export function PravilaContent() {
               <FileText className="h-5 w-5 text-neon-purple" />
             </div>
             <h2 className="font-display text-2xl font-bold tracking-tight text-foreground">
-              Preuzmi Pravila Natjecanja
+              Preuzmi Pravilnik Natjecanja
             </h2>
           </div>
            <div className="mt-4 space-y-4 text-muted-foreground leading-relaxed">
@@ -228,14 +228,14 @@ export function PravilaContent() {
               className="inline-flex items-center gap-2 rounded-lg bg-neon-purple/10 px-6 py-3 text-base font-medium text-neon-purple hover:bg-neon-purple/20 transition-colors"
               download="Pravilnik_MicroMouse_Zagreb.pdf"
               >
-              Preuzmi Službena Pravila (PDF)
+              Preuzmi Pravilnik Natjecanja (PDF)
               </a>
               <a
               href="https://docs.google.com/document/d/1_9D4XSdUI6c_gq3w7-RXWeAWdlFrlY8CkNVzqWzwu18/export?format=pdf"
               className="inline-flex items-center gap-2 rounded-lg bg-neon-peach/10 px-6 py-3 text-base font-medium text-neon-peach hover:bg-neon-peach/20 transition-colors"
-              download="Pravilnik_MicroMouse_Zagreb.pdf"
+              download="Specifikacije_MicroMouse_Zagreb.pdf"
               >
-              Preuzmi Neslužbena Pravila (PDF)
+              Preuzmi Specifikacije Natjecanja (PDF)
               </a>
             </div>
             
