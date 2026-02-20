@@ -29,7 +29,10 @@ export function ZaStudenteContent() {
             Kako do financiranja?
           </h2>
           <p className="mt-4 text-muted-foreground leading-relaxed">
-            {"Svim timovima koji do određenog roka predaju potpunu tehničku dokumentaciju, nudimo pokrivanje troškova izrade hardvera (komponente i PCB). Ukupni raspoloživi budžet po timu ovisit će o prikupljenim sponzorskim sredstvima i broju prijavljenih timova."}
+            {"Svim timovima koji do određenog roka predaju potpunu tehničku dokumentaciju, nudimo pokrivanje troškova izrade hardvera (komponente i PCB) u iznosu do 50 € * ili mogu odabrati starter kit sa svim potrebnim komponentama za oznovnu verziju robota."}
+          </p>
+          <p className="mt-4 text-muted-foreground leading-relaxed">
+            {"Ovdije ćete moći pristupiti formi gdje ćete odavrati želite li koristiti starter kit, prijaviti se za financijsku podršku s naše strane ili ništa od navedenog."}
           </p>
         </section>
 
@@ -138,7 +141,7 @@ export function ZaStudenteContent() {
             {"Što slijedi?"}
           </h2>
           <p className="mt-4 text-muted-foreground leading-relaxed">
-            {"Nakon predaje dokumentacije, naš stručni tim organizatora pregledat će vaše dizajne kako bismo osigurali da su funkcionalni prije narudžbe."}
+            {"Nakon predaje dokumentacije, organizacijski tim pregledat će vaše dizajne kako bismo osigurali da su funkcionalni prije narudžbe."}
           </p>
 
           <div className="mt-6 flex items-start gap-4 rounded-xl border border-neon-purple/30 bg-neon-purple/5 p-6">

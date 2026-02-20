@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Orbitron } from 'next/font/google'
+import { Inter, Orbitron, Sarpanch } from 'next/font/google'
 
 import './globals.css'
 
@@ -11,6 +11,12 @@ const _inter = Inter({
 const _orbitron = Orbitron({
   subsets: ['latin'],
   variable: '--font-orbitron',
+})
+
+const _sarpanch = Sarpanch({
+  subsets: ['latin'],
+  variable: '--font-sarpanch',
+  weight: '400'
 })
 
 export const metadata: Metadata = {
@@ -29,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="hr" className={`${_inter.variable} ${_orbitron.variable}`}>
+    <html lang="hr" className={`${_inter.variable} ${_orbitron.variable} ${_sarpanch.variable}`}>
       <body className="font-sans antialiased bg-dark-bg text-foreground">
         {children}
       </body>

@@ -8,12 +8,14 @@ const tierStyles = {
   gold: "border-neon-peach/40 hover:border-neon-peach/70",
   silver: "border-border hover:border-neon-pink/40",
   bronze: "border-border hover:border-neon-purple/40",
+  comunity: "border-border hover:border-foreground/40",
 } as const
 
 const tierLabels = {
   gold: "Zlatni sponzor",
   silver: "Srebrni sponzor",
   bronze: "Brončani sponzor",
+  comunity: "Akademski sponzor",
 } as const
 
 export function Sponsors() {
@@ -29,23 +31,24 @@ export function Sponsors() {
 
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {sponsorsData.map((sponsor) => (
-          <div
-            key={sponsor.name}
-            className={cn(
-              "glass flex flex-col items-center justify-center gap-3 rounded-xl border p-8 text-center transition-all duration-300",
-              tierStyles[sponsor.tier]
-            )}
+          <a
+        key={sponsor.name}
+        href={sponsor.websiteLink}
+        className={cn(
+          "glass flex flex-col items-center justify-center gap-3 rounded-xl border p-8 text-center transition-all duration-300",
+          tierStyles[sponsor.tier]
+        )}
           >
-            <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-              {tierLabels[sponsor.tier]}
-            </span>
-            <h3 className="font-display text-lg font-semibold text-foreground">
-              {sponsor.name}
-            </h3>
-            <p className="text-sm text-muted-foreground">
-              {sponsor.placeholderText}
-            </p>
-          </div>
+        <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
+          {tierLabels[sponsor.tier]}
+        </span>
+        <h3 className="font-display text-xl font-semibold text-foreground">
+          {sponsor.name}
+        </h3>
+        <p className="text-sm text-muted-foreground">
+          {sponsor.placeholderText}
+        </p>
+          </a>
         ))}
       </div>
     </SectionWrapper>

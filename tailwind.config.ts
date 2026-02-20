@@ -52,7 +52,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-inter)'],
-        display: ['var(--font-orbitron)'],
+        display: ['var(--font-sarpanch)'],
       },
       borderRadius: {
         lg: 'var(--radius)',

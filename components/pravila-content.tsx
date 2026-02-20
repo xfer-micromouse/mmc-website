@@ -149,6 +149,9 @@ export function PravilaContent() {
                   <li>
                     {"Svako diranje robota izvan startnog polja je zabranjeno. U slučaju da robot zapne, natjecatelj ga smije ukloniti iz labirinta uz penaliziranje iduće vožnje."}
                   </li>
+                  <li>
+                    {"Robot ne smije mijenjati težinu (npr. korištenje lakših baterija, micanje i mijenjanje senzora)."}
+                  </li>
                 </ul>
               </li>
               <li className="relative before:absolute before:-left-4 before:top-2.5 before:h-1.5 before:w-1.5 before:rounded-full before:bg-neon-purple/60">
@@ -176,16 +179,8 @@ export function PravilaContent() {
                 <span className="font-semibold text-foreground">Komponente ocjenjivanja:</span>
                 <ul className="mt-2 space-y-2 pl-4">
                   <li>
-                    <span className="font-semibold text-foreground">Vrijeme prolaska - 65%</span>
+                    <span className="font-semibold text-foreground">Vrijeme prolaska - 85%</span>
                     <li>{" Najbrže zabilježeno vrijeme. Bodovi se dodjeljuju proporcionalno na temelju brzine (npr. najbrži = 100%, ostali = postotak najbržeg vremena)*"}</li>
-                  </li>
-                  <li>
-                    <span className="font-semibold text-foreground">Tehnički performans robota - 10%</span>
-                    <li>{" Stabilnost, mehanički dizajn, točnost senzora i pouzdanost."}</li>
-                  </li>
-                  <li>
-                    <span className="font-semibold text-foreground">Algoritmi i strategija - 10%</span>
-                    <li>{" Učinkovitost algoritma, inteligentno istraživanje labirinta i optimizacija puta."}</li>
                   </li>
                   <li>
                     <span className="font-semibold text-foreground">Prezentacija - 15%</span>
@@ -227,15 +222,23 @@ export function PravilaContent() {
            <div className="mt-4 space-y-4 text-muted-foreground leading-relaxed">
             {"Za detaljnije informacije i sve specifične uvjete natjecanja, preuzmite službeni PDF dokument s pravilima."}
             </div>
-            <div className="mt-6 text-center">
-            <a
-              href="https://docs.google.com/document/d/1_9D4XSdUI6c_gq3w7-RXWeAWdlFrlY8CkNVzqWzwu18/export?format=pdf"
+            <div className="mt-6 flex justify-center gap-4">
+              <a
+              href="https://docs.google.com/document/d/1-4x1sYGxnSvp-mOz02x_tmDTpkiNM__WcsjG2Sw7UHU/export?format=pdf"
               className="inline-flex items-center gap-2 rounded-lg bg-neon-purple/10 px-6 py-3 text-base font-medium text-neon-purple hover:bg-neon-purple/20 transition-colors"
               download="Pravilnik_MicroMouse_Zagreb.pdf"
-            >
+              >
               Preuzmi Službena Pravila (PDF)
-            </a>
+              </a>
+              <a
+              href="https://docs.google.com/document/d/1_9D4XSdUI6c_gq3w7-RXWeAWdlFrlY8CkNVzqWzwu18/export?format=pdf"
+              className="inline-flex items-center gap-2 rounded-lg bg-neon-peach/10 px-6 py-3 text-base font-medium text-neon-peach hover:bg-neon-peach/20 transition-colors"
+              download="Pravilnik_MicroMouse_Zagreb.pdf"
+              >
+              Preuzmi Neslužbena Pravila (PDF)
+              </a>
             </div>
+            
         </section>
       </div>
     </div>

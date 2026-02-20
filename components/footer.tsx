@@ -7,10 +7,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 md:flex-row md:justify-between">
         <div className="flex flex-col items-center gap-2 md:items-start">
           <span className="font-display text-sm font-bold tracking-widest text-foreground">
-            MICROMOUSE Hrvatska
-          </span>
-          <span className="text-xs text-muted-foreground">
-            {"© 2026 Sva prava pridržana."}
+            X.FER
           </span>
         </div>
 

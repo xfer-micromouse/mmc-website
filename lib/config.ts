@@ -36,21 +36,31 @@ export const timelineData = [
   },
 ]
 
+//tier specificiran u sponsors.tsx
 export const sponsorsData = [
   {
-    name: "TBA1",
+    name: "Stype",
     tier: "gold" as const,
-    placeholderText: "TBA1",
+    placeholderText: "",
+    websiteLink: "https://stype.tv/"
   },
   {
-    name: "TBA2",
+    name: "DOK-ING",
     tier: "gold" as const,
-    placeholderText: "TBA2",
+    placeholderText: "",
+    websiteLink: "https://dok-ing.hr/"
   },
   {
-    name: "TBA3",
-    tier: "silver" as const,
-    placeholderText: "TBA3",
+    name: "FER",
+    tier: "comunity" as const,
+    placeholderText: "",
+    websiteLink: "https://www.fer.unizg.hr/"
+  },
+  {
+    name: "Sveučilište Algebra Bernays",
+    tier: "comunity" as const,
+    placeholderText: "",
+    websiteLink: "https://www.algebra.hr/"
   }
 ]
 
