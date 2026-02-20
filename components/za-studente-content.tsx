@@ -32,7 +32,7 @@ export function ZaStudenteContent() {
             {"Svim timovima koji do određenog roka predaju potpunu tehničku dokumentaciju, nudimo pokrivanje troškova izrade hardvera (komponente i PCB) u iznosu do 50 € * ili mogu odabrati starter kit sa svim potrebnim komponentama za oznovnu verziju robota."}
           </p>
           <p className="mt-4 text-muted-foreground leading-relaxed">
-            {"Ovdije ćete moći pristupiti formi gdje ćete odavrati želite li koristiti starter kit, prijaviti se za financijsku podršku s naše strane ili ništa od navedenog."}
+            {"Ovdije ćete moći pristupiti formi gdje ćete odabrati želite li koristiti starter kit, prijaviti se za financijsku podršku s naše strane ili ništa od navedenog."}
           </p>
         </section>
 
