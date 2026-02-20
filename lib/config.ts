@@ -51,6 +51,12 @@ export const sponsorsData = [
     websiteLink: "https://dok-ing.hr/"
   },
   {
+    name: "CoE Marble",
+    tier: "silver" as const,
+    placeholderText: "",
+    websiteLink: "https://marble.eu/"
+  },
+  {
     name: "FER",
     tier: "comunity" as const,
     placeholderText: "",
