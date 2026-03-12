@@ -36,7 +36,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
           Prijavi svoj tim
         </h3>
         <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-          Još {Math.ceil((new Date('2026-03-09').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} dana do početka radionica!!
+          Još {Math.ceil((new Date('2026-03-16').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} dana do početka radionica!!
         </p>
 
         <div className="mt-6 flex flex-col gap-4">
@@ -62,7 +62,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
           {IS_DISABLED ? "Prijave nisu počele" : "Prijave za studente"}
         </span>
         <p className="mt-0.5 text-sm text-muted-foreground">
-          {IS_DISABLED ? "" : "Prijave završavaju 7. ožujka 2026."}
+          {IS_DISABLED ? "" : "Prijave završavaju 15. ožujka 2026."}
         </p>
       </div>
     </a> 

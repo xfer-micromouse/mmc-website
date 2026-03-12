@@ -10,7 +10,7 @@ export const timelineData = [
     title: "Početak radionica i predavanja",
     description:
       "Pet predavanja o različitim djelovima dizajna i programiranja Micromousa kako bi olakšali proces i motivirali studente i sve prijavljene",
-    date: "9. ožujka 2026.",
+    date: "16. ožujka 2026.",
     iconType: "check" as const,
   },
   {
@@ -24,13 +24,13 @@ export const timelineData = [
     title: "Mock natjecanje",
     description:
       "Održavanje testnog natjecanja na pravom labirintu",
-    date: "15. svibnja 2026.",
+    date: "svibanj 2026.",
     iconType: "clock" as const,
   },
   {
     title: "Dan natjecanja",
     description:
-      "Dan-D... Na prostorima Sveučilišta Algebra održati će se natjecanje za sve prijavljene timove i kategorije",
+      "Na prostorima Sveučilišta Algebra održati će se natjecanje za sve prijavljene timove",
     date: "31. svibnja 2026.",
     iconType: "award" as const,
   },
