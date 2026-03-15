@@ -20,9 +20,25 @@ const _sarpanch = Sarpanch({
 })
 
 export const metadata: Metadata = {
-  title: 'Micromouse Croatia 2026',
+  title: 'Micromouse Zagreb 2026',
   description:
-    'Natjecanje autonomnih robota u rješavanju labirinta. Pridružite se Micromouse Croatia 2026!',
+    'Natjecanje autonomnih robota u rješavanju labirinta. Pridružite se Micromouse Zagreb 2026!',
+  keywords: [
+    'micromouse',
+    'micromouse zagreb',
+    'robotika natjecanje',
+    'autonomni roboti',
+    'robotics competition',
+  ],
+  icons: {
+    icon: "/logo.svg",
+  },
+  openGraph: {
+    title: 'Micromouse Zagreb 2026',
+    description:
+      'Natjecanje autonomnih robota u rješavanju labirinta.',
+    type: 'website',
+  },
 }
 
 export const viewport: Viewport = {

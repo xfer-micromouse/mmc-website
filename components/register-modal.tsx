@@ -1,14 +1,16 @@
 "use client"
 
-import { X, GraduationCap, Users } from "lucide-react"
+import { X, GraduationCap, Users, FileText} from "lucide-react"
 
 const STUDENT_FORM_URL = "https://forms.gle/KdXHfawPbWAS6zpM7" // TODO: Replace with actual Google Forms link
+const CV_SUBMITION = "https://docs.google.com/forms/d/e/1FAIpQLSciXOnW3BHTfIST0-UOfecWEY6mIaFp6DtJv2CTQ0HxYaLcCg/viewform?usp=dialog"
 
 interface RegisterModalProps {
   isOpen: boolean
   onClose: () => void
 }
 const IS_DISABLED = false;
+const IS_DISABLED_CV = false;
 
 export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
   if (!isOpen) return null
@@ -36,7 +38,7 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
           Prijavi svoj tim
         </h3>
         <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-          Još {Math.ceil((new Date('2026-03-16').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} dana do početka radionica!!
+          
         </p>
 
         <div className="mt-6 flex flex-col gap-4">
@@ -59,10 +61,36 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
       </div>
       <div>
         <span className="font-display text-base font-semibold text-foreground">
-          {IS_DISABLED ? "Prijave nisu počele" : "Prijave za studente"}
+          {IS_DISABLED ? "Prijave su završene" : "Prijave za studente"}
         </span>
         <p className="mt-0.5 text-sm text-muted-foreground">
-          {IS_DISABLED ? "" : "Prijave završavaju 15. ožujka 2026."}
+          {IS_DISABLED ? "Za više informacija kontaktirajte nas na micromouse@xfer.hr" : "Prijave završavaju 15. ožujka 2026."}
+        </p>
+      </div>
+    </a> 
+
+    <a 
+      href={IS_DISABLED_CV ? undefined : CV_SUBMITION}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-disabled={IS_DISABLED_CV}
+      className={`
+        group flex items-center gap-4 rounded-xl border border-border p-4 transition-all
+        ${IS_DISABLED_CV 
+          ? "pointer-events-none opacity-50 grayscale cursor-not-allowed" 
+          : "hover:border-neon-peach hover:shadow-[0_0_20px_rgba(255,94,120,0.15)]"
+        }
+      `}
+    >
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-neon-peach/10">
+        <FileText size={24} className="text-neon-peach" />
+      </div>
+      <div>
+        <span className="font-display text-base font-semibold text-foreground">
+          {IS_DISABLED_CV ? "Predaja CV-a zatvorena" : "Predaj životopis"}
+        </span>
+        <p className="mt-0.5 text-sm text-muted-foreground">
+          {IS_DISABLED_CV ? "Za više informacija kontaktirajte nas na micromouse@xfer.hr" : "Svi natjecatelji moraju predati svoj životopis do 1. travnja 2026."}
         </p>
       </div>
     </a> 
