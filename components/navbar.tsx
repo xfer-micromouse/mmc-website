@@ -29,13 +29,14 @@ export function Navbar({ onRegisterClick }: NavbarProps) {
         <Link href="/" className="flex items-center gap-2">
           <Image
             src="/logo.svg"
-            alt="Micromouse Croatia logo"
+            alt="Micromouse Zagreb logo"
             width={32}
             height={32}
             className="h-8 w-auto"
             loading="eager"
             priority
           />
+          <span className="w-2" />
           <span className="font-display text-lg font-bold tracking-wider text-foreground">
             MICROMOUSE
           </span>

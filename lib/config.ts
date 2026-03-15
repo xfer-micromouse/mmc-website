@@ -2,7 +2,7 @@ export const timelineData = [
   {
     title: "Otvaranje prijava",
     description:
-      "Prijavite svoj tim i robota za natjecanje. Maksimalno 3 člana po timu.",
+      "Prijavite svoj tim i robota za natjecanje. Maksimalno 4 člana po timu.",
     date: "20. veljače 2026.",
     iconType: "rocket" as const,
   },
@@ -77,8 +77,8 @@ export const competitionStats = [
     color: "#FF9F76",
   },
   {
-    value: "3m/s+",
-    label: "Brzina robota",
+    value: "1000€",
+    label: "Nagradni fond",
     color: "#FF5E78",
   },
   {
