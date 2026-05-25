@@ -39,17 +39,11 @@ export const timelineData = [
 //tier specificiran u sponsors.tsx
 export const sponsorsData = [
   {
-    name: "Stype",
-    tier: "gold" as const,
-    placeholderText: "",
-    websiteLink: "https://stype.tv/"
-  },
-  {
     name: "DOK-ING",
     tier: "gold" as const,
     placeholderText: "",
     websiteLink: "https://dok-ing.hr/"
-  },
+  },  
   {
     name: "CoE Marble",
     tier: "silver" as const,
