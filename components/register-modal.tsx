@@ -9,7 +9,7 @@ interface RegisterModalProps {
   isOpen: boolean
   onClose: () => void
 }
-const IS_DISABLED = false;
+const IS_DISABLED = true;
 const IS_DISABLED_CV = false;
 
 export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
