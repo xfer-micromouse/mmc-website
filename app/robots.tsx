@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://micromousezagreb.com/sitemap.xml',
+    sitemap: 'https://micromouse.xfer.hr/sitemap.xml',
   }
 }
