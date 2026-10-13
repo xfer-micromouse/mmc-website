@@ -2,7 +2,7 @@ import { ArrowDown } from "lucide-react"
 import { Countdown } from "@/components/countdown"
 import { MazeSim } from "@/components/maze-sim"
 import { RegisterButton } from "@/components/register-button"
-import { competitionDay } from "@/lib/config"
+import { competitionDay, EDITION_YEAR } from "@/lib/config"
 import { buttonStyles } from "@/lib/ui"
 
 export function Hero() {
@@ -14,12 +14,13 @@ export function Hero() {
       <div className="mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
         <div>
           <p className="silkscreen text-muted">
-            {competitionDay.date} // {competitionDay.location.name}
+            2. izdanje // {competitionDay.date ?? "datum uskoro"}
+            {competitionDay.location && ` // ${competitionDay.location.name}`}
           </p>
           <h1 className="mt-5 text-5xl font-bold leading-[1.02] tracking-tight text-foreground sm:text-6xl">
             Micromouse
             <br />
-            Zagreb <span className="text-accent-soft">2026</span>
+            Zagreb <span className="text-accent-soft">{EDITION_YEAR}</span>
           </h1>
           <p className="mt-6 max-w-md text-lg text-muted leading-relaxed">
             Najbrži miš u labirintu pobjeđuje.

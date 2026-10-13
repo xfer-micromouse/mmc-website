@@ -3,11 +3,12 @@
 import { useRef, useState } from "react"
 import { X } from "lucide-react"
 import { SectionWrapper } from "@/components/section-wrapper"
+import { DecodeText } from "@/components/decode-text"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
-import { gallery2025 } from "@/lib/config"
+import { FIRST_EDITION_YEAR, firstEditionGallery } from "@/lib/config"
 import { cn } from "@/lib/utils"
 
-type Photo = (typeof gallery2025)[number]
+type Photo = (typeof firstEditionGallery)[number]
 
 export function Gallery() {
   const dialogRef = useRef<HTMLDialogElement>(null)
@@ -21,11 +22,11 @@ export function Gallery() {
   return (
     <SectionWrapper id="galerija">
       <h2 className="mt-4 font-mono text-3xl font-medium tracking-tight text-accent-soft md:text-4xl">
-        &gt; dump /memory/2025
+        <DecodeText text={`> dump /memory/${FIRST_EDITION_YEAR}`} />
       </h2>
 
       <ul className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-        {gallery2025.map((photo, index) => (
+        {firstEditionGallery.map((photo, index) => (
           <GalleryItem key={photo.camera} photo={photo} index={index} onOpen={() => show(photo)} />
         ))}
       </ul>
@@ -41,7 +42,7 @@ export function Gallery() {
         {open && (
           <div className="relative">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={open.src} alt={`${open.tag}, Micromouse Zagreb 2025`} className="max-h-[90dvh] max-w-[94vw] object-contain" />
+            <img src={open.src} alt={`${open.tag}, Micromouse Zagreb ${FIRST_EDITION_YEAR}`} className="max-h-[90dvh] max-w-[94vw] object-contain" />
             <button
               type="button"
               onClick={() => dialogRef.current?.close()}
@@ -64,7 +65,9 @@ function GalleryItem({ photo, index, onOpen }: { photo: Photo; index: number; on
     <li
       ref={ref}
       className={cn(
-        "transition duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",
+        "flex flex-col transition duration-700 ease-out",
+        index === 0 && "sm:col-span-2 lg:row-span-2",
+        "motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",
         isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
       )}
       style={{ transitionDelay: `${(index % 3) * 120}ms` }}
@@ -72,11 +75,14 @@ function GalleryItem({ photo, index, onOpen }: { photo: Photo; index: number; on
       <button
         type="button"
         onClick={onOpen}
-        className="group/photo relative block aspect-[4/3] w-full overflow-hidden rounded-sm bg-floor"
+        className={cn(
+          "spotlight group/photo relative block w-full overflow-hidden rounded-sm bg-floor",
+          index === 0 ? "aspect-[4/3] lg:aspect-auto lg:flex-1" : "aspect-[4/3]"
+        )}
         aria-label={`Otvori fotografiju: ${photo.tag}`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={photo.src} alt="" loading="lazy" className="h-full w-full object-cover opacity-90" />
+        <img src={photo.src} alt="" loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover/photo:scale-[1.04] motion-reduce:transition-none" />
         <span className="viewfinder pointer-events-none absolute inset-3" aria-hidden="true" />
         <span className="scanlines pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/photo:opacity-100" aria-hidden="true" />
         <span className="silkscreen absolute left-5 top-5 bg-floor/70 px-1.5 py-0.5 text-foreground">

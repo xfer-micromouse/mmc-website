@@ -3,6 +3,7 @@
 import { ArrowUpRight } from "lucide-react"
 import { Modal } from "@/components/modal"
 import { cn } from "@/lib/utils"
+import { EDITION_YEAR } from "@/lib/config"
 
 const CONTACT_TEXT = "Za više informacija kontaktirajte nas na micromouse@xfer.hr"
 
@@ -19,14 +20,15 @@ export function RegisterModal({ isOpen, onClose }: RegisterModalProps) {
           href="https://forms.gle/KdXHfawPbWAS6zpM7"
           disabled
           title="Prijave za studente"
-          disabledTitle="Prijave su završene"
-          description="Prijave završavaju 15. ožujka 2026."
+          disabledTitle={`Prijave za ${EDITION_YEAR}. uskoro`}
+          description="Prijavite svoj tim."
         />
         <RegisterOption
           href="https://docs.google.com/forms/d/e/1FAIpQLSciXOnW3BHTfIST0-UOfecWEY6mIaFp6DtJv2CTQ0HxYaLcCg/viewform?usp=dialog"
+          disabled
           title="Predaj životopis"
-          disabledTitle="Predaja CV-a zatvorena"
-          description="Svi natjecatelji moraju predati svoj životopis do 1. travnja 2026."
+          disabledTitle="Predaja CV-a uskoro"
+          description="Svi natjecatelji predaju svoj životopis."
         />
       </ul>
     </Modal>

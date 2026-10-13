@@ -140,3 +140,103 @@
     scroll-behavior: auto;
   }
 }
+
+/*
+ * Pointer-driven effects. --mx/--my are viewport coordinates set by
+ * components/pointer-glow.tsx; they default off-screen so nothing lights up
+ * on touch devices. Radial gradients use background-attachment: fixed so the
+ * same viewport coordinates work for every element without per-element JS.
+ */
+:root {
+  --mx: -1000px;
+  --my: -1000px;
+}
+
+/* 1px border that glows where the cursor is */
+.spotlight {
+  position: relative;
+}
+
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(circle 180px at var(--mx) var(--my), rgb(var(--signal) / 0.9), transparent 70%) fixed;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Maze grid lines that light up near the cursor (goal section) */
+.grid-glow {
+  background: radial-gradient(circle 160px at var(--mx) var(--my), rgb(var(--signal) / 0.8), transparent 70%) fixed;
+  -webkit-mask:
+    linear-gradient(#000 1px, transparent 1px) 0 0 / 6.25% 6.25%,
+    linear-gradient(90deg, #000 1px, transparent 1px) 0 0 / 6.25% 6.25%;
+  mask:
+    linear-gradient(#000 1px, transparent 1px) 0 0 / 6.25% 6.25%,
+    linear-gradient(90deg, #000 1px, transparent 1px) 0 0 / 6.25% 6.25%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Ring that expands once when a via lights up */
+  .via-ping {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: via-ping 0.9s ease-out both;
+  }
+
+  .ir-beam {
+    animation: ir-beam 1.4s ease-in-out infinite;
+  }
+
+  /* A background trigger point firing: its PCB node fades in, holds, fades out */
+  .trigger-glow {
+    animation: trigger-glow var(--cycle, 14s) ease-in-out var(--delay, 0s) infinite both;
+  }
+
+  .trigger-pad {
+    animation: trigger-pad var(--cycle, 14s) ease-in-out var(--delay, 0s) infinite both;
+  }
+
+  /* Traces of a firing node draw outward from its chip */
+  .trigger-glow .trigger-draw path {
+    stroke-dasharray: 1;
+    animation: trigger-draw var(--cycle, 14s) cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0s) infinite both;
+  }
+}
+
+@keyframes trigger-glow {
+  0%, 100% { opacity: 0; }
+  5%, 22% { opacity: 0.75; }
+  34% { opacity: 0; }
+}
+
+@keyframes trigger-draw {
+  0% { stroke-dashoffset: 1; }
+  14%, 100% { stroke-dashoffset: 0; }
+}
+
+@keyframes trigger-pad {
+  0%, 32%, 100% { background-color: rgb(var(--accent) / 0.5); box-shadow: none; }
+  8%, 20% { background-color: rgb(var(--signal)); box-shadow: 0 0 12px rgb(var(--signal) / 0.8); }
+}
+
+@keyframes via-ping {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(3.2); opacity: 0; }
+}
+
+@keyframes ir-beam {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
+@keyframes progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}

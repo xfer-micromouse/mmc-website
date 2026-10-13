@@ -4,11 +4,15 @@ import { useEffect, useRef, useState } from "react"
 import { cellPath, loadMaze, MAZE_SIZE, wallPath, type Cell } from "@/lib/maze"
 import { homeSections, type HomeSectionId } from "@/lib/config"
 import { cn } from "@/lib/utils"
+import { PointerGlow } from "@/components/pointer-glow"
+import { PcbTriggers } from "@/components/pcb-triggers"
 
 interface Via {
   id: HomeSectionId
   x: number
   y: number
+  /** Where the branch into the section label ends */
+  labelX: number
 }
 
 /** Rail x positions: mobile left edge, desktop alternates two lanes with 45° jogs. */
@@ -27,10 +31,13 @@ function buildTrace(wrapper: HTMLElement) {
     const el = document.getElementById(s.id)
     if (!el) continue
     const label = el.querySelector(".silkscreen")
-    const y = label
-      ? label.getBoundingClientRect().top - wrapper.getBoundingClientRect().top + 8
-      : el.offsetTop
-    vias.push({ id: s.id, x: vias.length % 2 === 0 ? a : b, y })
+    const box = wrapper.getBoundingClientRect()
+    const labelBox = label?.getBoundingClientRect()
+    // Ignore the reveal animation's translateY so vias line up with the final layout.
+    const shift = new DOMMatrix(getComputedStyle(el).transform).m42
+    const y = labelBox ? labelBox.top - box.top + labelBox.height / 2 - shift : el.offsetTop
+    const x = vias.length % 2 === 0 ? a : b
+    vias.push({ id: s.id, x, y, labelX: labelBox ? labelBox.left - box.left - 10 : x })
   }
   if (vias.length === 0) return { d: "", vias }
 
@@ -92,6 +99,8 @@ export function HomeChrome({ children }: { children: React.ReactNode }) {
 
   return (
     <div ref={wrapperRef} className="relative">
+      <PointerGlow />
+      <PcbTriggers />
       {children}
 
       <svg
@@ -99,26 +108,50 @@ export function HomeChrome({ children }: { children: React.ReactNode }) {
         height={trace.height}
         aria-hidden="true"
       >
-        <path d={trace.d} className="stroke-accent/25" strokeWidth="2" fill="none" />
-        <path d={trace.d} pathLength={1} className="trace-draw stroke-accent" strokeWidth="2" fill="none" />
-        {trace.vias.map((via) => (
-          <circle
-            key={via.id}
-            cx={via.x}
-            cy={via.y}
-            r="5"
-            strokeWidth="2"
-            className={cn(
-              "transition-colors duration-500",
-              visited.has(via.id) ? "fill-signal stroke-signal" : "fill-background stroke-accent"
-            )}
-          />
-        ))}
+        <path d={trace.d} className="stroke-accent/30" strokeWidth="3" fill="none" />
+        {/* Wide faint copy under the drawn trace reads as a glow without a costly filter */}
+        <path d={trace.d} pathLength={1} className="trace-draw stroke-accent-soft/25" strokeWidth="12" strokeLinecap="round" fill="none" />
+        <path d={trace.d} pathLength={1} className="trace-draw stroke-accent-soft" strokeWidth="3" fill="none" />
+        {trace.vias.map((via) => {
+          const lit = visited.has(via.id)
+          return (
+            <g key={via.id}>
+              {via.labelX > via.x + 12 && (
+                <>
+                  <path
+                    d={`M${via.x} ${via.y}H${via.labelX}`}
+                    strokeWidth="2"
+                    className={cn("transition-colors duration-700", lit ? "stroke-signal" : "stroke-accent/50")}
+                  />
+                  <rect
+                    x={via.labelX - 3}
+                    y={via.y - 3}
+                    width="6"
+                    height="6"
+                    className={cn("transition-colors duration-700", lit ? "fill-signal" : "fill-accent")}
+                  />
+                </>
+              )}
+              {lit && <circle cx={via.x} cy={via.y} r="7" className="via-ping fill-none stroke-signal" strokeWidth="2" />}
+              <circle
+                cx={via.x}
+                cy={via.y}
+                r="7"
+                strokeWidth="3"
+                className={cn(
+                  "transition-colors duration-500",
+                  lit ? "fill-background stroke-signal" : "fill-background stroke-accent"
+                )}
+              />
+              <circle cx={via.x} cy={via.y} r="2.5" className={lit ? "fill-signal" : "fill-accent"} />
+            </g>
+          )
+        })}
       </svg>
 
       {trace.d && (
         <div
-          className="trace-mouse pointer-events-none absolute left-0 top-0 h-3 w-3 rounded-[3px_3px_6px_6px] bg-foreground shadow-[0_0_10px_rgb(var(--signal)/0.7)]"
+          className="trace-mouse pointer-events-none absolute left-0 top-0 h-4 w-4 rounded-[4px_4px_8px_8px] bg-foreground shadow-[0_0_16px_4px_rgb(var(--signal)/0.6)]"
           style={{ offsetPath: `path("${trace.d}")` }}
           aria-hidden="true"
         />

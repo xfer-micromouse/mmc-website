@@ -35,7 +35,7 @@ export function CommandPalette({
 
   const commands: Command[] = [
     { name: "pravila", description: "službena pravila natjecanja", run: () => go("/pravila") },
-    { name: "raspored", description: "ključni datumi 2026", run: () => go("/#timeline") },
+    { name: "raspored", description: "ključni datumi", run: () => go("/#timeline") },
     { name: "studenti", description: "financiranje i podrška", run: () => go("/za-studente") },
     {
       name: "prijava",

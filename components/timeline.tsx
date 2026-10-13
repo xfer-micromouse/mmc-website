@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react"
 import { SectionHeading, SectionWrapper } from "@/components/section-wrapper"
 import { TimelineModal } from "@/components/timeline-modal"
-import { timelineData } from "@/lib/config"
+import { competitionDay, EDITION_YEAR, timelineData } from "@/lib/config"
 import { cn } from "@/lib/utils"
 
 type PhaseState = "done" | "current" | "upcoming"
 
-const dayEnd = (isoDate: string) => new Date(`${isoDate}T23:59:59+02:00`).getTime()
-const dayStart = (isoDate: string) => new Date(`${isoDate}T00:00:00+02:00`).getTime()
+const dayEnd = (isoDate: string | null) => (isoDate ? new Date(`${isoDate}T23:59:59+02:00`).getTime() : Infinity)
+const dayStart = (isoDate: string | null) => (isoDate ? new Date(`${isoDate}T00:00:00+02:00`).getTime() : Infinity)
 
 /** The latest phase that has started is current until the competition day ends. */
 function phaseStates(now: number): PhaseState[] {
@@ -32,21 +32,21 @@ export function Timeline() {
 
   return (
     <SectionWrapper id="timeline">
-      <SectionHeading title="Raspored 2026" subtitle="Ključni datumi na putu do natjecanja." />
+      <SectionHeading title={`Raspored ${EDITION_YEAR}`} subtitle="Ključni datumi na putu do natjecanja." />
 
-      <ol className="mt-14 border-l-2 border-accent/70">
+      <ol className="mt-14 border-l-2 border-accent/70 lg:grid lg:grid-cols-5 lg:border-l-0 lg:border-t-2">
         {timelineData.map((item, index) => {
           const state = states?.[index] ?? "upcoming"
           const isLast = index === timelineData.length - 1
           return (
             <li
               key={item.title}
-              className="relative pb-12 pl-8 last:pb-0 md:grid md:grid-cols-[11rem_1fr] md:gap-10"
+              className="relative pb-12 pl-8 last:pb-0 md:grid md:grid-cols-[11rem_1fr] md:gap-10 lg:block lg:pb-0 lg:pl-0 lg:pr-6 lg:pt-9"
             >
               {/* Solder pad with a drilled hole */}
               <span
                 className={cn(
-                  "absolute -left-[9px] top-0.5 flex h-4 w-4 items-center justify-center rounded-sm border-2",
+                  "absolute -left-[9px] top-0.5 flex h-4 w-4 items-center justify-center rounded-sm border-2 lg:-top-[9px] lg:left-0",
                   state === "current" && "border-signal bg-signal/20 shadow-[0_0_14px_rgb(var(--signal)/0.6)]",
                   state === "done" && "border-accent bg-accent",
                   state === "upcoming" && "border-accent bg-background"
@@ -61,18 +61,18 @@ export function Timeline() {
                   state === "current" ? "text-signal" : "text-muted"
                 )}
               >
-                {item.date}
+                {item.date ?? "uskoro"}
                 {state === "current" && <span className="ml-2">[ SADA ]</span>}
                 {state === "done" && <span className="sr-only"> (završeno)</span>}
               </p>
-              <div className="mt-2 max-w-2xl md:mt-0">
+              <div className="mt-2 max-w-2xl md:mt-0 lg:mt-3">
                 <h3 className="text-lg font-medium tracking-tight text-foreground">{item.title}</h3>
                 <p className="mt-2 text-muted leading-relaxed">{item.description}</p>
-                {isLast && (
+                {isLast && competitionDay.schedule.length > 0 && (
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(true)}
-                    className="mt-4 font-mono text-sm text-accent-soft underline decoration-accent underline-offset-4 transition-colors hover:text-foreground"
+                    className="mt-4 text-left font-mono text-sm text-accent-soft underline decoration-accent underline-offset-4 transition-colors hover:text-foreground"
                   >
                     &gt; satnica dana natjecanja
                   </button>

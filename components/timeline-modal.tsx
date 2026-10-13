@@ -19,6 +19,7 @@ export function TimelineModal({ isOpen, onClose }: TimelineModalProps) {
           <CalendarDays size={14} className="shrink-0" />
           {date}
         </p>
+        {location && (
         <p className="flex items-center gap-2">
           <MapPin size={14} className="shrink-0" />
           <a
@@ -30,6 +31,7 @@ export function TimelineModal({ isOpen, onClose }: TimelineModalProps) {
             {location.name}
           </a>
         </p>
+        )}
       </div>
 
       <ol className="mt-6 border-l border-border">

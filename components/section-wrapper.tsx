@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { homeSections, type HomeSectionId } from "@/lib/config"
+import { DecodeText } from "@/components/decode-text"
 
 interface SectionWrapperProps {
   id: HomeSectionId
@@ -49,7 +50,7 @@ export function SectionHeading({ title, subtitle }: SectionHeadingProps) {
   return (
     <div className="mt-4 max-w-2xl">
       <h2 className="text-3xl font-semibold tracking-tight text-accent-soft text-balance md:text-4xl">
-        {title}
+        <DecodeText text={title} />
       </h2>
       {subtitle && <p className="mt-4 text-muted leading-relaxed">{subtitle}</p>}
     </div>

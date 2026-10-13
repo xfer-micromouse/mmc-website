@@ -1,7 +1,7 @@
 "use client"
 
 const lines = [
-  "MMZ-BIOS v2.0 // X.FER",
+  "MICROMOUSE ZAGREB BIOS v2.0 // X.FER",
   "POST ........................ OK",
   "IR senzori [4] .............. OK",
   "motori [2] .................. OK",

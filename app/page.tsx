@@ -2,14 +2,10 @@ import { Hero } from "@/components/hero"
 import { HomeChrome } from "@/components/home-chrome"
 import { Timeline } from "@/components/timeline"
 import { Gallery } from "@/components/gallery"
-import {
-  FirstEditionSection,
-  GoalSection,
-  HowItWorksSection,
-  ReadoutsSection,
-  SponsorsSection,
-  WhatIsSection,
-} from "@/components/home-sections"
+import { HowItWorks } from "@/components/how-it-works"
+import { Readouts } from "@/components/readouts"
+import { SponsorsBoard } from "@/components/sponsors-board"
+import { FirstEditionSection, GoalSection, WhatIsSection } from "@/components/home-sections"
 
 export default function Page() {
   return (
@@ -18,11 +14,11 @@ export default function Page() {
       <HomeChrome>
         <WhatIsSection />
         <FirstEditionSection />
-        <HowItWorksSection />
+        <HowItWorks />
         <Timeline />
         <Gallery />
-        <ReadoutsSection />
-        <SponsorsSection />
+        <Readouts />
+        <SponsorsBoard />
         <GoalSection />
       </HomeChrome>
     </>

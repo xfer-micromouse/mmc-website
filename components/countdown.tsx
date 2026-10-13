@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { competitionDay } from "@/lib/config"
 
-const target = new Date(competitionDay.startsAt).getTime()
+const target = competitionDay.startsAt ? new Date(competitionDay.startsAt).getTime() : null
 const units = [
   ["dana", 86_400_000],
   ["sati", 3_600_000],
@@ -20,6 +20,14 @@ export function Countdown() {
     const id = setInterval(() => setNow(Date.now()), 1000)
     return () => clearInterval(id)
   }, [])
+
+  if (target === null) {
+    return (
+      <p className="font-mono text-sm text-muted">
+        <span className="text-signal">&gt;</span> Datum natjecanja uskoro
+      </p>
+    )
+  }
 
   if (now !== null && now >= target) {
     return (
