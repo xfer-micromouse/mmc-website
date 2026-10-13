@@ -5,12 +5,14 @@ import { X } from "lucide-react"
 import { SectionWrapper } from "@/components/section-wrapper"
 import { DecodeText } from "@/components/decode-text"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import Link from "next/link"
 import { FIRST_EDITION_YEAR, firstEditionGallery } from "@/lib/config"
 import { cn } from "@/lib/utils"
 
 type Photo = (typeof firstEditionGallery)[number]
 
-export function Gallery() {
+/** First-edition photos; `limit` shows a teaser with a link to the full archive. */
+export function Gallery({ limit }: { limit?: number }) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [open, setOpen] = useState<Photo | null>(null)
 
@@ -26,10 +28,16 @@ export function Gallery() {
       </h2>
 
       <ul className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-        {firstEditionGallery.map((photo, index) => (
+        {firstEditionGallery.slice(0, limit).map((photo, index) => (
           <GalleryItem key={photo.camera} photo={photo} index={index} onOpen={() => show(photo)} />
         ))}
       </ul>
+
+      {limit !== undefined && (
+        <Link href={`/arhiva/${FIRST_EDITION_YEAR}`} className="mt-10 inline-block font-mono text-sm text-accent-soft underline decoration-accent underline-offset-4 hover:text-foreground">
+          &gt; cd /arhiva/{FIRST_EDITION_YEAR}
+        </Link>
+      )}
 
       {/* Native dialog: focus trap and Escape-to-close come from the browser. */}
       <dialog

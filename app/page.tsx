@@ -1,26 +1,28 @@
 import { Hero } from "@/components/hero"
-import { HomeChrome } from "@/components/home-chrome"
-import { Timeline } from "@/components/timeline"
-import { Gallery } from "@/components/gallery"
-import { HowItWorks } from "@/components/how-it-works"
+import { Journey } from "@/components/journey"
+import { WhatIsSection, FaqSection } from "@/components/home-sections"
 import { Readouts } from "@/components/readouts"
-import { SponsorsBoard } from "@/components/sponsors-board"
-import { FirstEditionSection, GoalSection, WhatIsSection } from "@/components/home-sections"
+import { HowItWorks } from "@/components/how-it-works"
+import { Timeline } from "@/components/timeline"
+import { SponsorsSection } from "@/components/sponsors-board"
+import { Gallery } from "@/components/gallery"
+import { PointerGlow } from "@/components/pointer-glow"
 
 export default function Page() {
   return (
     <>
+      <PointerGlow />
       <Hero />
-      <HomeChrome>
+      {/* Order matches homeSections: the first JOURNEY_STOPS are unlocked in the maze */}
+      <Journey>
         <WhatIsSection />
-        <FirstEditionSection />
+        <Readouts />
         <HowItWorks />
         <Timeline />
-        <Gallery />
-        <Readouts />
-        <SponsorsBoard />
-        <GoalSection />
-      </HomeChrome>
+        <SponsorsSection />
+      </Journey>
+      <Gallery limit={3} />
+      <FaqSection />
     </>
   )
 }

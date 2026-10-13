@@ -24,7 +24,20 @@ export function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
-        <Link href="/" className="flex items-center gap-3">
+        <Link
+          href="/"
+          onClick={(e) => {
+            // On the home page the logo glides back to the top instead of reloading.
+            // The journey handles "journey:top" with its own glide; otherwise scroll natively.
+            if (pathname !== "/") return
+            e.preventDefault()
+            if (window.location.hash) history.pushState(null, "", "/")
+            if (!window.dispatchEvent(new CustomEvent("journey:top", { cancelable: true }))) return
+            const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches
+            window.scrollTo({ top: 0, behavior: reduced ? "instant" : "smooth" })
+          }}
+          className="flex items-center gap-3"
+        >
           <Image src="/logo.svg" alt="" width={28} height={28} className="h-7 w-auto" priority />
           <span className="text-sm font-semibold tracking-tight text-foreground">
             Micromouse Zagreb

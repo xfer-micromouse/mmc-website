@@ -19,6 +19,8 @@ const config: Config = {
           foreground: token('accent-foreground'),
         },
         signal: token('signal'),
+        copper: token('copper'),
+        gold: token('gold'),
       },
       fontFamily: {
         sans: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],

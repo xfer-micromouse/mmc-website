@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { MazeGame } from "@/components/maze-game"
+import { MazeSim } from "@/components/maze-sim"
 import { cn } from "@/lib/utils"
 
-type View = "list" | "help" | "play"
+type View = "list" | "help" | "play" | "sim"
 
 interface Command {
   name: string
@@ -46,6 +47,7 @@ export function CommandPalette({
       },
     },
     { name: "play", description: "vozi miša kroz labirint", run: () => "play" },
+    { name: "sim", description: "flood-fill simulacija s kontrolama", run: () => "sim" },
     { name: "help", description: "popis naredbi", run: () => "help" },
   ]
   const matches = commands.filter((c) => c.name.startsWith(query.trim().toLowerCase()))
@@ -90,7 +92,7 @@ export function CommandPalette({
       ref={dialogRef}
       onClose={() => onOpenChange(false)}
       onClick={(e) => e.target === dialogRef.current && onOpenChange(false)}
-      className="mx-auto mt-[12vh] w-[min(36rem,calc(100vw-2rem))] rounded-md border border-border bg-floor p-0 text-foreground backdrop:bg-floor/80 backdrop:backdrop-blur-sm"
+      className={cn("mx-auto mt-[12vh] rounded-md border border-border bg-floor p-0 text-foreground backdrop:bg-floor/80 backdrop:backdrop-blur-sm", view === "sim" ? "w-[min(52rem,calc(100vw-2rem))]" : "w-[min(36rem,calc(100vw-2rem))]")}
       aria-label="Terminal"
     >
       <div className="flex items-center gap-2 border-b border-border px-4 py-3 font-mono">
@@ -126,6 +128,10 @@ export function CommandPalette({
         {view === "play" ? (
           <div className="p-2">
             <MazeGame />
+          </div>
+        ) : view === "sim" ? (
+          <div className="p-2">
+            <MazeSim />
           </div>
         ) : view === "help" ? (
           <div className="space-y-1 p-2 text-muted">

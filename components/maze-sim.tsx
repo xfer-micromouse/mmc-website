@@ -42,8 +42,13 @@ const status = {
   done: "DONE",
 } as const
 
-/** Hero simulation: a mouse solving an unknown maze with flood fill, then a timed speed run. */
-export function MazeSim() {
+/**
+ * Hero simulation: a mouse solving an unknown maze with flood fill, then a timed speed run.
+ * `controls={false}` (home page hero) shows the maze with a compact mouse.log
+ * laid over its lower corner and no buttons; the full version with the side
+ * panel and buttons lives in the command palette.
+ */
+export function MazeSim({ controls = true }: { controls?: boolean }) {
   const reducedMotion = useReducedMotion()
   const [mazeIndex, setMazeIndex] = useState(0)
   const [fast, setFast] = useState(false)
@@ -101,8 +106,11 @@ export function MazeSim() {
   const [mx, my] = run.mouse
 
   return (
-    <div ref={rootRef} className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_14rem] xl:grid-cols-[minmax(0,1fr)_16rem]">
-      <figure className="min-w-0">
+    <div
+      ref={rootRef}
+      className={cn(controls && "grid gap-4 sm:grid-cols-[minmax(0,1fr)_14rem] xl:grid-cols-[minmax(0,1fr)_16rem]")}
+    >
+      <figure className="relative min-w-0">
         <svg
           viewBox={`0 0 ${EXTENT} ${EXTENT}`}
           className="w-full rounded-md border border-border bg-floor"
@@ -148,51 +156,74 @@ export function MazeSim() {
           )}
           <circle cx={PAD + mx * CELL + CELL / 2} cy={PAD + my * CELL + CELL / 2} r="2.8" className="fill-foreground" />
         </svg>
+        {!controls && (
+          <div className="pointer-events-none absolute bottom-10 right-3 w-60 rounded-md border border-border bg-floor/80 p-3 font-mono text-[11px] text-muted backdrop-blur-md sm:right-4 sm:w-64">
+            <div className="flex items-center justify-between">
+              <span>mouse.log</span>
+              <span className={run.phase === "done" ? "text-signal" : "text-accent-soft"}>{status[run.phase]}</span>
+            </div>
+            <ol className="mt-2 space-y-0.5">
+              {run.log.slice(-4).map((line, i) => (
+                <li key={`${run.log.length}-${i}`} className="truncate">
+                  {line}
+                </li>
+              ))}
+            </ol>
+            <div className="mt-2 flex justify-between border-t border-border pt-2 tabular-nums">
+              <span>steps {run.steps}</span>
+              <span className={run.phase === "done" ? "text-signal" : "text-foreground"}>
+                {reducedMotion ? "--:--.--" : formatTime(elapsed)}
+              </span>
+            </div>
+          </div>
+        )}
         <figcaption className="mt-2 font-mono text-[11px] text-muted">
           labirint: {run.maze.label}
         </figcaption>
       </figure>
 
-      <div className="flex min-w-0 flex-col rounded-md border border-border bg-floor font-mono text-xs">
-        <div className="flex items-center justify-between border-b border-border px-3 py-2 text-muted">
-          <span>mouse.log</span>
-          <span className={run.phase === "done" ? "text-signal" : "text-accent-soft"}>{status[run.phase]}</span>
-        </div>
-        <ol className="h-40 overflow-hidden px-3 py-2 leading-relaxed text-muted sm:h-auto sm:flex-1">
-          {run.log.slice(-9).map((line, i) => (
-            <li key={`${run.log.length}-${i}`} className="truncate">
-              {line}
-            </li>
-          ))}
-        </ol>
-        <dl className="grid grid-cols-2 border-t border-border">
-          <div className="border-r border-border px-3 py-2">
-            <dt className="text-muted">steps</dt>
-            <dd className="text-sm tabular-nums text-foreground">{run.steps}</dd>
+      {controls && (
+        <div className="flex min-w-0 flex-col rounded-md border border-border bg-floor font-mono text-xs">
+          <div className="flex items-center justify-between border-b border-border px-3 py-2 text-muted">
+            <span>mouse.log</span>
+            <span className={run.phase === "done" ? "text-signal" : "text-accent-soft"}>{status[run.phase]}</span>
           </div>
-          <div className="px-3 py-2">
-            <dt className="text-muted">speed run</dt>
-            <dd className={cn("text-sm tabular-nums", run.phase === "done" ? "text-signal" : "text-foreground")}>
-              {reducedMotion ? "--:--.--" : formatTime(elapsed)}
-            </dd>
-          </div>
-        </dl>
-        <div className="grid gap-2 border-t border-border p-2">
-          <button type="button" onClick={nextMaze} className={terminalButton}>
-            [ Novi labirint ]
-          </button>
-          {!reducedMotion && (
-            <button
-              type="button"
-              onClick={() => setFast((f) => !f)}
-              aria-pressed={fast}
-              className={cn(terminalButton, fast && "bg-signal/15")}
-            >
-              [ Ubrzaj {fast ? "4x" : "1x"} ]
+          <ol className="h-40 overflow-hidden px-3 py-2 leading-relaxed text-muted sm:h-auto sm:flex-1">
+            {run.log.slice(-9).map((line, i) => (
+              <li key={`${run.log.length}-${i}`} className="truncate">
+                {line}
+              </li>
+            ))}
+          </ol>
+          <dl className="grid grid-cols-2 border-t border-border">
+            <div className="border-r border-border px-3 py-2">
+              <dt className="text-muted">steps</dt>
+              <dd className="text-sm tabular-nums text-foreground">{run.steps}</dd>
+            </div>
+            <div className="px-3 py-2">
+              <dt className="text-muted">speed run</dt>
+              <dd className={cn("text-sm tabular-nums", run.phase === "done" ? "text-signal" : "text-foreground")}>
+                {reducedMotion ? "--:--.--" : formatTime(elapsed)}
+              </dd>
+            </div>
+          </dl>
+          <div className="grid gap-2 border-t border-border p-2">
+            <button type="button" onClick={nextMaze} className={terminalButton}>
+              [ Novi labirint ]
             </button>
-          )}
+            {!reducedMotion && (
+              <button
+                type="button"
+                onClick={() => setFast((f) => !f)}
+                aria-pressed={fast}
+                className={cn(terminalButton, fast && "bg-signal/15")}
+              >
+                [ Ubrzaj {fast ? "4x" : "1x"} ]
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

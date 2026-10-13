@@ -6,12 +6,11 @@ export const FIRST_EDITION_YEAR = 2026
 
 /**
  * Competition day for the current edition. Leave `date`/`startsAt` as null
- * until the date is set: the hero then says the date is coming and hides
- * the countdown; the day schedule button stays hidden too.
+ * until the date is set; the day schedule button stays hidden until then.
  */
 export const competitionDay: {
   date: string | null
-  /** Opening time (ISO with offset), used by the hero countdown */
+  /** Opening time (ISO with offset) */
   startsAt: string | null
   location: { name: string; mapUrl: string } | null
   schedule: { time: string; label: string }[]
@@ -71,11 +70,23 @@ export const sponsorTiers = [
 
 export type SponsorTier = (typeof sponsorTiers)[number]["tier"]
 
+/** Where "Postani sponzor" leads. */
+export const SPONSOR_CONTACT = `mailto:micromouse@xfer.hr?subject=${encodeURIComponent(`Sponzorstvo Micromouse Zagreb ${EDITION_YEAR}`)}`
+
 /**
- * Add or remove sponsors here. The home page board groups them by tier
- * (empty tiers are skipped) and wires every chip automatically.
+ * Open sponsor places for the current edition, drawn as empty (DNP) chip
+ * footprints. Put a sponsor's name in `name` when the place is taken.
  */
-export const sponsorsData: { name: string; tier: SponsorTier; websiteLink: string }[] = [
+export const sponsorSlots: { tier: SponsorTier; name?: string; websiteLink?: string }[] = [
+  { tier: "gold" },
+  { tier: "silver" },
+  { tier: "silver" },
+  { tier: "community" },
+  { tier: "community" },
+]
+
+/** Sponsors of the first edition, shown on /arhiva/2026. */
+export const sponsors2026: { name: string; tier: SponsorTier; websiteLink: string }[] = [
   {
     name: "DOK-ING",
     tier: "gold",
@@ -101,21 +112,45 @@ export const sponsorsData: { name: string; tier: SponsorTier; websiteLink: strin
 /** Shown as instrument readouts on the home page */
 export const competitionStats = [
   { channel: "MAZE.SIZE", value: "16x16", unit: "polja", label: "Veličina labirinta" },
-  { channel: "PRIZE.POOL", value: "1000", unit: "€", label: "Nagradni fond" },
+  { channel: "PRIZE.POOL", value: "TBA", unit: "", label: "Nagradni fond" },
   { channel: "TIME.LIMIT", value: "13", unit: "min", label: "Vremenski limit" },
 ]
 
-/** Home page sections in scroll order; drives the PCB trace, mini-map and labels. */
+/** Home page sections in page order. The first JOURNEY_STOPS are unlocked by the mouse in the maze. */
 export const homeSections = [
   { id: "about", designator: "U1", label: "Što je Micromouse" },
-  { id: "v1", designator: "U2", label: "Prvo izdanje" },
+  { id: "brojke", designator: "U2", label: "Ključne brojke" },
   { id: "kako-radi", designator: "U3", label: "Kako radi" },
   { id: "timeline", designator: "U4", label: `Raspored ${EDITION_YEAR}` },
-  { id: "galerija", designator: "U5", label: `Galerija ${FIRST_EDITION_YEAR}` },
-  { id: "brojke", designator: "U6", label: "Ključne brojke" },
-  { id: "sponsors", designator: "U7", label: "Sponzori" },
-  { id: "prijava", designator: "U8", label: "Cilj" },
+  { id: "sponsors", designator: "U5", label: `Sponzori ${EDITION_YEAR}` },
+  { id: "galerija", designator: "U6", label: `Galerija ${FIRST_EDITION_YEAR}` },
+  { id: "faq", designator: "U7", label: "FAQ" },
 ] as const
+
+export const JOURNEY_STOPS = 5
+
+export const faq = [
+  {
+    q: "Tko se može prijaviti?",
+    a: "Studentski timovi do 4 člana. Robota gradite i programirate sami, od elektronike do algoritma.",
+  },
+  {
+    q: "Trebam li već znati graditi robote?",
+    a: "Ne. Prije natjecanja održavamo radionice i predavanja o dizajnu, elektronici i programiranju micromousa.",
+  },
+  {
+    q: "Koliko košta izrada robota?",
+    a: "Timovima koji na vrijeme predaju tehničku dokumentaciju financiramo izradu pločica i komponente do dogovorenog iznosa ili dajemo starter kit.",
+  },
+  {
+    q: "Koja su pravila za robota?",
+    a: "Robot mora biti potpuno autonoman i najviše 25 x 25 cm. Svaki tim ima 13 minuta u labirintu. Sve je u pravilniku.",
+  },
+  {
+    q: "Kada su prijave?",
+    a: `Datumi za ${EDITION_YEAR}. objavit ćemo uskoro. Pratite stranicu ili nam pišite na micromouse@xfer.hr.`,
+  },
+]
 
 export type HomeSectionId = (typeof homeSections)[number]["id"]
 
