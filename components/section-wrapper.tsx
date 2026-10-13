@@ -26,3 +26,29 @@ export function SectionWrapper({ id, children, className }: SectionWrapperProps)
     </section>
   )
 }
+
+interface SectionHeadingProps {
+  title: string
+  subtitle?: string
+  centered?: boolean
+}
+
+export function SectionHeading({ title, subtitle, centered = true }: SectionHeadingProps) {
+  return (
+    <>
+      <h2
+        className={cn(
+          "font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-balance",
+          centered && "text-center"
+        )}
+      >
+        {title}
+      </h2>
+      {subtitle && (
+        <p className="mx-auto mt-4 max-w-lg text-center text-muted-foreground leading-relaxed">
+          {subtitle}
+        </p>
+      )}
+    </>
+  )
+}

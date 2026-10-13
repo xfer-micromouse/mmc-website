@@ -1,3 +1,20 @@
+export const SITE_URL = "https://micromouse.xfer.hr"
+
+export const competitionDay = {
+  date: "31. svibnja 2026.",
+  location: {
+    name: "Algebra sveučilište",
+    mapUrl: "https://maps.app.goo.gl/PrnWBgGW7KkRxycw7",
+  },
+  schedule: [
+    { time: "14:00", label: "Otvorenje" },
+    { time: "14:30", label: "Priprema i networking" },
+    { time: "15:30", label: "Početak natjecanja" },
+    { time: "17:15", label: "Prezentacije" },
+    { time: "17:45", label: "Proglašenje" },
+  ],
+}
+
 export const timelineData = [
   {
     title: "Otvaranje prijava",
@@ -9,7 +26,7 @@ export const timelineData = [
   {
     title: "Početak radionica i predavanja",
     description:
-      "Pet predavanja o različitim djelovima dizajna i programiranja Micromousa kako bi olakšali proces i motivirali studente i sve prijavljene",
+      "Pet predavanja o različitim dijelovima dizajna i programiranja Micromousa kako bi olakšali proces i motivirali studente i sve prijavljene",
     date: "16. ožujka 2026.",
     iconType: "check" as const,
   },
@@ -30,37 +47,33 @@ export const timelineData = [
   {
     title: "Dan natjecanja",
     description:
-      "Na prostorima Sveučilišta Algebra održati će se natjecanje za sve prijavljene timove",
-    date: "31. svibnja 2026.",
+      "Na prostorima Sveučilišta Algebra održat će se natjecanje za sve prijavljene timove",
+    date: competitionDay.date,
     iconType: "award" as const,
   },
 ]
 
-//tier specificiran u sponsors.tsx
+// Tier styles and labels live in components/sponsors.tsx
 export const sponsorsData = [
   {
     name: "DOK-ING",
     tier: "gold" as const,
-    placeholderText: "",
-    websiteLink: "https://dok-ing.hr/"
-  },  
+    websiteLink: "https://dok-ing.hr/",
+  },
   {
     name: "CoE Marble",
     tier: "silver" as const,
-    placeholderText: "",
-    websiteLink: "https://marble.eu/"
+    websiteLink: "https://marble.eu/",
   },
   {
     name: "FER",
-    tier: "comunity" as const,
-    placeholderText: "",
-    websiteLink: "https://www.fer.unizg.hr/"
+    tier: "community" as const,
+    websiteLink: "https://www.fer.unizg.hr/",
   },
   {
     name: "Sveučilište Algebra Bernays",
-    tier: "comunity" as const,
-    placeholderText: "",
-    websiteLink: "https://www.algebra.hr/"
+    tier: "community" as const,
+    websiteLink: "https://www.algebra.hr/",
   }
 ]
 

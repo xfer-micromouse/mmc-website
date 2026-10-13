@@ -6,6 +6,7 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useOpenRegister } from "@/components/site-shell"
 
 const navLinks = [
   { label: "O Natjecanju", href: "/#about" },
@@ -14,29 +15,24 @@ const navLinks = [
   { label: "Pravila", href: "/pravila" },
 ]
 
-interface NavbarProps {
-  onRegisterClick: () => void
-}
-
-export function Navbar({ onRegisterClick }: NavbarProps) {
+export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
+  const onRegisterClick = useOpenRegister()
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-dark-bg/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-6">
           <Image
             src="/logo.svg"
             alt="Micromouse Zagreb logo"
             width={32}
             height={32}
             className="h-8 w-auto"
-            loading="eager"
             priority
           />
-          <span className="w-2" />
           <span className="font-display text-lg font-bold tracking-wider text-foreground">
             MICROMOUSE
           </span>
@@ -71,7 +67,7 @@ export function Navbar({ onRegisterClick }: NavbarProps) {
         {/* CTA */}
         <button
           onClick={onRegisterClick}
-          className="hidden rounded-lg bg-gradient-to-r from-neon-peach via-neon-pink to-neon-purple px-5 py-2 text-sm font-semibold text-light-bg transition-opacity hover:opacity-90 md:block"
+          className="hidden rounded-lg bg-gradient-to-r from-neon-peach via-neon-pink to-neon-purple px-5 py-2 text-sm font-semibold text-foreground transition-opacity hover:opacity-90 md:block"
         >
           Prijavi se
         </button>
@@ -111,7 +107,7 @@ export function Navbar({ onRegisterClick }: NavbarProps) {
                 setMobileOpen(false)
                 onRegisterClick()
               }}
-              className="w-full rounded-lg bg-gradient-to-r from-neon-peach via-neon-pink to-neon-purple px-5 py-2.5 text-sm font-semibold text-light-bg"
+              className="w-full rounded-lg bg-gradient-to-r from-neon-peach via-neon-pink to-neon-purple px-5 py-2.5 text-sm font-semibold text-foreground"
             >
               Prijavi se
             </button>
