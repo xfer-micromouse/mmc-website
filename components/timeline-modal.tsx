@@ -1,6 +1,6 @@
 "use client"
 
-import { MapPin, Clock } from "lucide-react"
+import { MapPin, CalendarDays } from "lucide-react"
 import { Modal } from "@/components/modal"
 import { competitionDay } from "@/lib/config"
 
@@ -14,42 +14,36 @@ export function TimelineModal({ isOpen, onClose }: TimelineModalProps) {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Raspored natjecanja">
-      <div className="mt-4 flex flex-col gap-2">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Clock size={14} className="text-neon-pink shrink-0" />
-          <span>{date}</span>
-        </div>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <MapPin size={14} className="text-neon-pink shrink-0" />
+      <div className="mt-3 flex flex-col gap-1.5 text-sm text-muted">
+        <p className="flex items-center gap-2">
+          <CalendarDays size={14} className="shrink-0" />
+          {date}
+        </p>
+        <p className="flex items-center gap-2">
+          <MapPin size={14} className="shrink-0" />
           <a
             href={location.mapUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-neon-pink underline-offset-2 hover:underline"
+            className="text-foreground underline decoration-border underline-offset-4 hover:decoration-accent-soft"
           >
             {location.name}
           </a>
-        </div>
+        </p>
       </div>
 
-      <div className="mt-6 flex flex-col">
-        {schedule.map((item, index) => (
-          <div key={item.time} className="flex items-start gap-4">
-            <span className="w-10 shrink-0 pt-0.5 text-right font-mono text-sm font-semibold text-neon-peach">
-              {item.time}
-            </span>
-
-            <div className="flex flex-col items-center">
-              <div className="h-3 w-3 shrink-0 rounded-full border-2 border-neon-pink bg-card" />
-              {index < schedule.length - 1 && (
-                <div className="w-px flex-1 min-h-[2rem] bg-gradient-to-b from-neon-pink to-neon-purple" />
-              )}
-            </div>
-
-            <span className="pb-5 pt-0.5 text-sm text-foreground">{item.label}</span>
-          </div>
+      <ol className="mt-6 border-l border-border">
+        {schedule.map((item) => (
+          <li key={item.time} className="relative grid grid-cols-[3.5rem_1fr] gap-3 py-2.5 pl-5">
+            <span
+              className="absolute -left-[3px] top-[1.05rem] h-[5px] w-[5px] bg-accent"
+              aria-hidden="true"
+            />
+            <span className="font-mono text-sm tabular-nums text-muted">{item.time}</span>
+            <span className="text-sm text-foreground">{item.label}</span>
+          </li>
         ))}
-      </div>
+      </ol>
     </Modal>
   )
 }

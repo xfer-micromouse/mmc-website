@@ -1,37 +1,34 @@
 import Link from "next/link"
-import { Mail, Github, ExternalLink } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card/50 px-4 py-12">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 md:flex-row md:justify-between">
-        <div className="flex flex-col items-center gap-2 md:items-start">
-          <span className="font-display text-sm font-bold tracking-widest text-foreground">
-            X.FER
-          </span>
+    <footer className="border-t border-border">
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 text-sm md:flex-row md:items-center md:justify-between md:px-6">
+        <div>
+          <p className="text-muted">
+            Organizira <span className="font-medium text-foreground">X.FER</span>
+          </p>
+          <p className="mt-1 font-mono text-xs text-muted">
+            pritisni <kbd className="text-accent-soft">/</kbd> za terminal
+          </p>
         </div>
-
-        <div className="flex items-center gap-6">
-          <Link
-            href="/pravila"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Pravila
-          </Link>
-          <Link
-            href="/za-studente"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Za Studente
-          </Link>
-          <a
-            href="mailto:micromouse@xfer.hr"
-            className="flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <Mail size={14} />
-            Kontakt
-          </a>
-        </div>
+        <ul className="flex flex-wrap gap-x-6 gap-y-2 text-muted">
+          <li>
+            <Link href="/pravila" className="transition-colors hover:text-foreground">
+              Pravila
+            </Link>
+          </li>
+          <li>
+            <Link href="/za-studente" className="transition-colors hover:text-foreground">
+              Za Studente
+            </Link>
+          </li>
+          <li>
+            <a href="mailto:micromouse@xfer.hr" className="transition-colors hover:text-foreground">
+              micromouse@xfer.hr
+            </a>
+          </li>
+        </ul>
       </div>
     </footer>
   )

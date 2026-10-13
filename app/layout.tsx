@@ -1,25 +1,22 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Orbitron, Sarpanch } from 'next/font/google'
+import { Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 
 import { SiteShell } from '@/components/site-shell'
 import { SITE_URL } from '@/lib/config'
 import './globals.css'
 
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin', 'latin-ext'],
-  variable: '--font-inter',
+  variable: '--font-space-grotesk',
 })
 
-const orbitron = Orbitron({
-  subsets: ['latin'],
-  variable: '--font-orbitron',
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-jetbrains-mono',
 })
 
-const sarpanch = Sarpanch({
-  subsets: ['latin'],
-  variable: '--font-sarpanch',
-  weight: '400',
-})
+// Runs before paint: show the boot screen once per session, never with reduced motion.
+const bootScript = `try{if(!sessionStorage.getItem('mmz-booted')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('boot');sessionStorage.setItem('mmz-booted','1')}}catch(e){}`
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -38,14 +35,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Micromouse Zagreb 2026',
-    description:
-      'Natjecanje autonomnih robota u rješavanju labirinta.',
+    description: 'Natjecanje autonomnih robota u rješavanju labirinta.',
     type: 'website',
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0f0e13',
+  themeColor: '#140F1F',
 }
 
 export default function RootLayout({
@@ -54,8 +50,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="hr" className={`${inter.variable} ${orbitron.variable} ${sarpanch.variable}`}>
-      <body className="font-sans antialiased bg-dark-bg text-foreground">
+    <html
+      lang="hr"
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
+      </head>
+      <body className="font-sans antialiased">
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

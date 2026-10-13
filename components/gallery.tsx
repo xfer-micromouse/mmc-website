@@ -1,0 +1,89 @@
+"use client"
+
+import { useRef, useState } from "react"
+import { X } from "lucide-react"
+import { SectionWrapper } from "@/components/section-wrapper"
+import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { gallery2025 } from "@/lib/config"
+import { cn } from "@/lib/utils"
+
+type Photo = (typeof gallery2025)[number]
+
+export function Gallery() {
+  const dialogRef = useRef<HTMLDialogElement>(null)
+  const [open, setOpen] = useState<Photo | null>(null)
+
+  const show = (photo: Photo) => {
+    setOpen(photo)
+    dialogRef.current?.showModal()
+  }
+
+  return (
+    <SectionWrapper id="galerija">
+      <h2 className="mt-4 font-mono text-3xl font-medium tracking-tight text-accent-soft md:text-4xl">
+        &gt; dump /memory/2025
+      </h2>
+
+      <ul className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        {gallery2025.map((photo, index) => (
+          <GalleryItem key={photo.camera} photo={photo} index={index} onOpen={() => show(photo)} />
+        ))}
+      </ul>
+
+      {/* Native dialog: focus trap and Escape-to-close come from the browser. */}
+      <dialog
+        ref={dialogRef}
+        onClose={() => setOpen(null)}
+        onClick={(e) => e.target === dialogRef.current && dialogRef.current.close()}
+        className="m-auto max-h-none max-w-none bg-transparent p-0 backdrop:bg-floor/95"
+        aria-label={open ? `${open.camera}: ${open.tag}` : undefined}
+      >
+        {open && (
+          <div className="relative">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={open.src} alt={`${open.tag}, Micromouse Zagreb 2025`} className="max-h-[90dvh] max-w-[94vw] object-contain" />
+            <button
+              type="button"
+              onClick={() => dialogRef.current?.close()}
+              className="absolute right-2 top-2 rounded-md bg-floor/80 p-2 text-foreground"
+              aria-label="Zatvori"
+            >
+              <X size={18} />
+            </button>
+          </div>
+        )}
+      </dialog>
+    </SectionWrapper>
+  )
+}
+
+function GalleryItem({ photo, index, onOpen }: { photo: Photo; index: number; onOpen: () => void }) {
+  const { ref, isVisible } = useScrollReveal<HTMLLIElement>(0.25)
+
+  return (
+    <li
+      ref={ref}
+      className={cn(
+        "transition duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+      )}
+      style={{ transitionDelay: `${(index % 3) * 120}ms` }}
+    >
+      <button
+        type="button"
+        onClick={onOpen}
+        className="group/photo relative block aspect-[4/3] w-full overflow-hidden rounded-sm bg-floor"
+        aria-label={`Otvori fotografiju: ${photo.tag}`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={photo.src} alt="" loading="lazy" className="h-full w-full object-cover opacity-90" />
+        <span className="viewfinder pointer-events-none absolute inset-3" aria-hidden="true" />
+        <span className="scanlines pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/photo:opacity-100" aria-hidden="true" />
+        <span className="silkscreen absolute left-5 top-5 bg-floor/70 px-1.5 py-0.5 text-foreground">
+          {photo.camera} // {photo.tag}
+        </span>
+      </button>
+      <p className="silkscreen mt-3 normal-case tracking-[0.08em] text-muted">{photo.caption}</p>
+    </li>
+  )
+}

@@ -8,9 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function PravilaPage() {
-  return (
-    <div className="pt-16">
-      <PravilaContent />
-    </div>
-  )
+  return <PravilaContent />
 }

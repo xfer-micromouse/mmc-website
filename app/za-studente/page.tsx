@@ -8,9 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function ZaStudentePage() {
-  return (
-    <div className="pt-16">
-      <ZaStudenteContent />
-    </div>
-  )
+  return <ZaStudenteContent />
 }
