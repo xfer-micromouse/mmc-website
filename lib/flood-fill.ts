@@ -30,7 +30,7 @@ export interface Run {
   /** Walls the mouse has sensed so far */
   known: { eastWall: boolean[][]; southWall: boolean[][] }
   seen: boolean[][]
-  /** Current flood distances to the target, Infinity where unreachable */
+  /** Flood distances to the goal from the walls known so far (what the maze shows) */
   dist: number[][]
   steps: number
   speedPath: Cell[]
@@ -175,14 +175,11 @@ export function stepRun(previous: Run): Run {
   if (run.phase === "search") {
     const targets = searchTargets(run)
     if (targets.length === 0) {
-      const length = flood(run.known, goalCells)[START[1]][START[0]]
-      write(run, `> shortest path proven: ${length} cells`)
+      write(run, `> shortest path proven: ${run.dist[START[1]][START[0]]} cells`)
       write(run, "> mode: return, target: start")
       run.phase = "return"
-      run.dist = flood(run.known, [START])
       return run
     }
-    run.dist = flood(run.known, targets)
   }
   if (run.phase === "return" && atStart(run.mouse)) {
     run.speedPath = knownShortestPath(run)
@@ -195,19 +192,21 @@ export function stepRun(previous: Run): Run {
 
   const targets =
     run.phase === "explore" ? goalCells : run.phase === "search" ? searchTargets(run) : [START]
+  // Steering flood toward the current target; the displayed map always stays goal distances.
   sense(run, run.mouse)
-  run.dist = flood(run.known, targets)
+  const steer = flood(run.known, targets)
   const options = neighbours(run.mouse).filter((n) => hasPassage(run.known, run.mouse, n))
-  const next = options.reduce((best, n) => (run.dist[n[1]][n[0]] < run.dist[best[1]][best[0]] ? n : best))
+  const next = options.reduce((best, n) => (steer[n[1]][n[0]] < steer[best[1]][best[0]] ? n : best))
   run.mouse = next
   run.steps += 1
   sense(run, next)
-  run.dist = flood(run.known, targets)
+  run.dist = flood(run.known, goalCells)
   if (run.phase === "search") {
     write(run, `> searching cell ${label(next)} open=${searchTargets(run).length}`)
   } else {
+    const remaining = flood(run.known, targets)[next[1]][next[0]]
     const verb = run.phase === "explore" ? "exploring" : "returning"
-    write(run, `> ${verb} cell ${label(next)} dist=${run.dist[next[1]][next[0]]}`)
+    write(run, `> ${verb} cell ${label(next)} dist=${remaining}`)
   }
   return run
 }
