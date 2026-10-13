@@ -1,12 +1,11 @@
 "use client"
 
 import { ArrowRight } from "lucide-react"
+import { useOpenRegister } from "@/components/site-shell"
 
-interface HeroProps {
-  onRegisterClick: () => void
-}
+export function Hero() {
+  const onRegisterClick = useOpenRegister()
 
-export function Hero({ onRegisterClick }: HeroProps) {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-16">
       {/* Background glow orbs */}
@@ -25,11 +24,11 @@ export function Hero({ onRegisterClick }: HeroProps) {
           <span className="gradient-text">MicroMouse</span>
         </h1>
         <h2 className="mt-3 font-display text-2xl font-bold tracking-widest text-foreground sm:text-3xl md:text-4xl">
-          ZAGREB {" "}
+          ZAGREB{" "}
           <span className="text-neon-purple">2026</span>
         </h2>
         <p className="mx-auto mt-6 max-w-md text-lg text-muted-foreground leading-relaxed">
-          {"Najbrži miš u labirintu pobjeđuje."}
+          Najbrži miš u labirintu pobjeđuje.
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

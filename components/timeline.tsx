@@ -1,18 +1,19 @@
 "use client"
 
 import { useState } from "react"
-import { Rocket, CheckCircle, Clock, Trophy, Award } from "lucide-react"
-import { SectionWrapper } from "@/components/section-wrapper"
+import { Rocket, CheckCircle, Clock, Award } from "lucide-react"
+import { SectionHeading, SectionWrapper } from "@/components/section-wrapper"
 import { timelineData } from "@/lib/config"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { cn } from "@/lib/utils"
 import { TimelineModal } from "@/components/timeline-modal"
 
+type TimelineEntry = (typeof timelineData)[number]
+
 const iconMap = {
   rocket: Rocket,
   check: CheckCircle,
   clock: Clock,
-  trophy: Trophy,
   award: Award,
 } as const
 
@@ -21,12 +22,10 @@ export function Timeline() {
 
   return (
     <SectionWrapper id="timeline">
-      <h2 className="text-center font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-balance">
-        Raspored
-      </h2>
-      <p className="mx-auto mt-4 max-w-lg text-center text-muted-foreground leading-relaxed">
-        Ključni datumi na putu do natjecanja.
-      </p>
+      <SectionHeading
+        title="Raspored"
+        subtitle="Ključni datumi na putu do natjecanja."
+      />
 
       <div className="relative mt-16">
         <div
@@ -39,7 +38,7 @@ export function Timeline() {
               key={item.title}
               item={item}
               index={index}
-              onTimelineClick={() => setIsModalOpen(true)}
+              onScheduleClick={() => setIsModalOpen(true)}
             />
           ))}
         </div>
@@ -53,11 +52,11 @@ export function Timeline() {
 function TimelineItem({
   item,
   index,
-  onTimelineClick,
+  onScheduleClick,
 }: {
-  item: (typeof timelineData)[number]
+  item: TimelineEntry
   index: number
-  onTimelineClick?: () => void
+  onScheduleClick: () => void
 }) {
   const { ref, isVisible } = useScrollReveal(0.2)
   const Icon = iconMap[item.iconType]
@@ -73,48 +72,30 @@ function TimelineItem({
       )}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      {/* Left card slot */}
-      <div className="hidden md:flex md:w-[calc(50%-1.125rem)] justify-end pr-8">
-        {isLeft && (
-          <CardContent
-            item={item}
-            isLeft={true}
-            isLast={isLast}
-            onTimelineClick={onTimelineClick}
-          />
+      {/* Desktop spacer for the opposite half; card sits left or right of the dot */}
+      <div
+        className={cn(
+          "hidden md:block md:w-[calc(50%-1.125rem)]",
+          isLeft && "md:order-last"
         )}
-      </div>
+        aria-hidden="true"
+      />
 
-      {/* Center icon dot */}
-      <div className="relative z-10 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-border bg-card
-        md:mx-0
-        /* mobile: sits naturally in flow */
-      ">
+      <div className="relative z-10 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border border-border bg-card">
         <Icon size={16} className="text-neon-pink" />
       </div>
 
-      {/* Right card slot */}
-      <div className="flex-1 pl-6 md:w-[calc(50%-1.125rem)] md:flex-none md:pl-8">
-        {/* Mobile: always show card here */}
-        <div className="md:hidden">
-          <CardContent
-            item={item}
-            isLeft={false}
-            isLast={isLast}
-            onTimelineClick={onTimelineClick}
-          />
-        </div>
-        {/* Desktop: only right-side items */}
-        {!isLeft && (
-          <div className="hidden md:block">
-            <CardContent
-              item={item}
-              isLeft={false}
-              isLast={isLast}
-              onTimelineClick={onTimelineClick}
-            />
-          </div>
+      <div
+        className={cn(
+          "flex-1 pl-6 md:w-[calc(50%-1.125rem)] md:flex-none",
+          isLeft ? "md:order-first md:pl-0 md:pr-8" : "md:pl-8"
         )}
+      >
+        <CardContent
+          item={item}
+          isLast={isLast}
+          onScheduleClick={onScheduleClick}
+        />
       </div>
     </div>
   )
@@ -122,14 +103,12 @@ function TimelineItem({
 
 function CardContent({
   item,
-  isLeft,
   isLast,
-  onTimelineClick,
+  onScheduleClick,
 }: {
-  item: (typeof timelineData)[number]
-  isLeft: boolean
+  item: TimelineEntry
   isLast: boolean
-  onTimelineClick?: () => void
+  onScheduleClick: () => void
 }) {
   return (
     <div className="relative rounded-xl border border-border bg-card p-5 w-full">
@@ -138,7 +117,7 @@ function CardContent({
       </span>
       {isLast && (
         <button
-          onClick={onTimelineClick}
+          onClick={onScheduleClick}
           className="absolute top-4 right-4 inline-flex rounded-full bg-neon-pink px-4 py-2 text-sm font-medium text-card transition hover:bg-neon-peach"
         >
           Timeline

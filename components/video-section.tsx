@@ -1,17 +1,12 @@
-"use client"
-
-import { SectionWrapper } from "@/components/section-wrapper"
+import { SectionHeading, SectionWrapper } from "@/components/section-wrapper"
 
 export function VideoSection() {
   return (
     <SectionWrapper id="what-is">
-      <h2 className="text-center font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-balance">
-        {"Što je Micromouse?"}
-      </h2>
-      <p className="mx-auto mt-4 max-w-lg text-center text-muted-foreground leading-relaxed">
-        Pogledajte video i saznajte više o jednom od najstarijih robotičkih
-        natjecanja na svijetu.
-      </p>
+      <SectionHeading
+        title="Što je Micromouse?"
+        subtitle="Pogledajte video i saznajte više o jednom od najstarijih robotičkih natjecanja na svijetu."
+      />
 
       <div className="relative mx-auto mt-12 max-w-3xl">
         {/* Glow effect */}

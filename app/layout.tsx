@@ -1,25 +1,28 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Orbitron, Sarpanch } from 'next/font/google'
 
+import { SiteShell } from '@/components/site-shell'
+import { SITE_URL } from '@/lib/config'
 import './globals.css'
 
-const _inter = Inter({
+const inter = Inter({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-inter',
 })
 
-const _orbitron = Orbitron({
+const orbitron = Orbitron({
   subsets: ['latin'],
   variable: '--font-orbitron',
 })
 
-const _sarpanch = Sarpanch({
+const sarpanch = Sarpanch({
   subsets: ['latin'],
   variable: '--font-sarpanch',
-  weight: '400'
+  weight: '400',
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'Micromouse Zagreb 2026',
   description:
     'Natjecanje autonomnih robota u rješavanju labirinta. Pridružite se Micromouse Zagreb 2026!',
@@ -31,7 +34,7 @@ export const metadata: Metadata = {
     'robotics competition',
   ],
   icons: {
-    icon: "/logo.svg",
+    icon: '/logo.svg',
   },
   openGraph: {
     title: 'Micromouse Zagreb 2026',
@@ -51,9 +54,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="hr" className={`${_inter.variable} ${_orbitron.variable} ${_sarpanch.variable}`}>
+    <html lang="hr" className={`${inter.variable} ${orbitron.variable} ${sarpanch.variable}`}>
       <body className="font-sans antialiased bg-dark-bg text-foreground">
-        {children}
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   )

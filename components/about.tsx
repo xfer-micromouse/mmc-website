@@ -1,6 +1,4 @@
-"use client"
-
-import { SectionWrapper } from "@/components/section-wrapper"
+import { SectionHeading, SectionWrapper } from "@/components/section-wrapper"
 import { competitionStats } from "@/lib/config"
 
 export function About() {
@@ -9,9 +7,7 @@ export function About() {
       <div className="grid gap-12 md:grid-cols-2 md:items-center">
         {/* Left Column - Text */}
         <div>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl text-balance">
-            O Natjecanju
-          </h2>
+          <SectionHeading title="O Natjecanju" centered={false} />
           <p className="mt-6 text-muted-foreground leading-relaxed">
             Micromouse Zagreb je studentsko robotičarsko natjecanje u kojem mali autonomni robot samostalno
             istražuje i rješava labirint. Natjecatelji grade i programiraju robota iz nule.
@@ -23,7 +19,7 @@ export function About() {
           </p>
           <p className="mt-4 text-muted-foreground leading-relaxed">
             Micromouse Zagreb okuplja timove iz
-            cijele Hvatske koji spajaju znanja iz elektronike, embeded sustava i algoritama navigacije. 
+            cijele Hrvatske koji spajaju znanja iz elektronike, embedded sustava i algoritama navigacije.
           </p>
 
           {/* Stats */}
